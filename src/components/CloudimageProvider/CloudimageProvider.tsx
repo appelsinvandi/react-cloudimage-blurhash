@@ -7,22 +7,12 @@ export const CloudimageContext = React.createContext<CloudimageContextValue>({
   },
 })
 
-export interface CloudimageProviderState {}
-
 export interface CloudimageProviderProps {
   config: CloudimageContextConfig
 }
 
-class CloudimageProvider extends React.Component<CloudimageProviderProps, CloudimageProviderState> {
-  // = Lifecycle
-
-  render() {
-    return (
-      <CloudimageContext.Provider value={{ config: this.props.config }}>
-        {this.props.children}
-      </CloudimageContext.Provider>
-    )
-  }
+const CloudimageProvider: React.FunctionComponent<CloudimageProviderProps> = (props) => {
+  return <CloudimageContext.Provider value={{ config: props.config }}>{props.children}</CloudimageContext.Provider>
 }
 
 export default CloudimageProvider
