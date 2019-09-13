@@ -1,0 +1,33 @@
+---
+name: Img
+---
+
+import { Playground } from 'docz'
+import { Img } from './index.tsx'
+import { CloudimageProvider } from '../CloudimageProvider/index.tsx'
+
+# Img
+
+The `<Img>` tag will load the image, and if provided with a blurhash, show a blurred placeholde until the image is loaded.
+
+<Playground>
+  <CloudimageProvider config={{ token: 'demo' }}>
+    <div
+      style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(3, 1fr)',
+        gridColumnGap: '8px',
+        gridRowGap: '8px',
+        maxWidth: '100%',
+        width: '100%',
+      }}
+    >
+      <Img src="sample.li/hotel.jpg" ratio={1 / 1} blurhash="LYJH,LyZER9FtSNfkXo#M|oLWCkC" />
+
+      <Img src="https://scaleflex.ultrafast.io/https://jolipage.airstore.io/121.jpg" ratio={1 / 1} blurhash="LFG8fyoy~A%N00vex^0z*0$eWAV@" />
+
+      <Img src="https://scaleflex.ultrafast.io/https://jolipage.airstore.io/img.jpg" ratio={1 / 1} blurhash="LZE:9@tnRjM{yZxut8oftpxtWARj" />
+    </div>
+
+  </CloudimageProvider>
+</Playground>
