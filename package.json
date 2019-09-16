@@ -12,6 +12,10 @@
     "url": "https://github.com/Zoulember/react-cloudimage-blurhash"
   },
   "homepage": "https://github.com/Zoulember/react-cloudimage-blurhash",
+  "files": [
+    "dist/",
+    "src/"
+  ],
   "keywords": [
     "react",
     "cloudimage",
@@ -21,7 +25,8 @@
   "scripts": {
     "build": "tsc",
     "docs:dev": "docz dev",
-    "docs:build": "docz build"
+    "docs:build": "docz build",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "blurhash": "~1.1.3",
