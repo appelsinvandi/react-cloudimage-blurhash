@@ -18,34 +18,32 @@ export function generateCloudimageUrl(
 ): string {
   const url = new URL(`https://${token}.cloudimg.io/v7/${src}`)
 
+  let width
+  let height
   switch (componentProps.type) {
     default:
     case ComponentType.FIT:
-      url.searchParams.append('height', String(componentState.monitoredDimensions.height))
-      url.searchParams.append('width', String(componentState.monitoredDimensions.width))
+      height = componentState.monitoredDimensions.height
+      width = componentState.monitoredDimensions.width
       break
 
     case ComponentType.HEIGHT_BOUND_RATIO:
-      url.searchParams.append('height', String(componentState.monitoredDimensions.height))
-      url.searchParams.append('width', String(componentState.monitoredDimensions.height * componentProps.ratio))
+      height = componentState.monitoredDimensions.height
+      width = componentState.monitoredDimensions.height * componentProps.ratio
       break
 
     case ComponentType.STATIC_DIMENSIONS:
-      url.searchParams.append(
-        'height',
-        String(typeof componentProps.size === 'number' ? componentProps.size : componentProps.size.height)
-      )
-      url.searchParams.append(
-        'width',
-        String(typeof componentProps.size === 'number' ? componentProps.size : componentProps.size.width)
-      )
+      height = typeof componentProps.size === 'number' ? componentProps.size : componentProps.size.height
+      width = typeof componentProps.size === 'number' ? componentProps.size : componentProps.size.width
       break
 
     case ComponentType.WIDTH_BOUND_RATIO:
-      url.searchParams.append('height', String(componentState.monitoredDimensions.width * (1 / componentProps.ratio)))
-      url.searchParams.append('width', String(componentState.monitoredDimensions.width))
+      height = componentState.monitoredDimensions.width * (1 / componentProps.ratio)
+      width = componentState.monitoredDimensions.width
       break
   }
+  url.searchParams.append('height', String(getPixelDensityRegulatedValue(width)))
+  url.searchParams.append('width', String(getPixelDensityRegulatedValue(height)))
 
   // Add operation params
   if (componentProps.operations != null) {
@@ -119,4 +117,8 @@ export function generateBlurhashElement(blurhash: string): HTMLCanvasElement {
   ctx.putImageData(imageData, 0, 0)
 
   return canvas
+}
+
+function getPixelDensityRegulatedValue(pixels: number): number {
+  return pixels * (window.devicePixelRatio || 1)
 }
