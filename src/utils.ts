@@ -42,8 +42,8 @@ export function generateCloudimageUrl(
       width = componentState.monitoredDimensions.width
       break
   }
-  url.searchParams.append('height', String(getPixelDensityRegulatedValue(width)))
-  url.searchParams.append('width', String(getPixelDensityRegulatedValue(height)))
+  url.searchParams.append('height', String(getPixelDensityRegulatedValue(height)))
+  url.searchParams.append('width', String(getPixelDensityRegulatedValue(width)))
 
   // Add operation params
   if (componentProps.operations != null) {
