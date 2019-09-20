@@ -1,13 +1,14 @@
 import * as React from 'react'
 
 // Components
-import LazyLoad from 'react-lazyload'
+import LazyLoad, { LazyLoadProps } from 'react-lazyload'
+import BlurhashBackgroundImage from './BlurhashBackgroundImage'
 
 // Utils
 import clsx from 'clsx'
 import debounce from 'debounce'
 import elementResizeEvent from 'element-resize-event'
-import { generateCloudimageUrl, generateBlurhashElement } from '../../utils'
+import { generateCloudimageUrl } from '../../utils'
 
 // Constants
 import { ComponentType } from '../../constants'
@@ -26,7 +27,6 @@ import { CloudimageContextConfig } from '../CloudimageProvider'
 // Styles
 import {
   BackgroundImgClasses,
-  generateBackgroundImgBlurredPlaceholderStyles,
   generateBackgroundImgChildWrapperStyles,
   generateBackgroundImgContentStyles,
   generateBackgroundImgImageStyles,
@@ -91,17 +91,27 @@ class BackgroundImg extends React.Component<BackgroundImgProps, BackgroundImgSta
 
     const isLoaded = this.isImageLoaded || this.previousImageUrl != null
 
-    return (
-      <div
-        style={{
-          ...generateBackgroundImgBlurredPlaceholderStyles(isLoaded),
-          backgroundImage: `url(${generateBlurhashElement(this.blurhash).toDataURL()})`,
-        }}
-        className={clsx(this.classes.blurredPlaceholder, {
-          'state__is-loaded': isLoaded,
-        })}
-      />
-    )
+    if (this.noLazyLoad) {
+      return (
+        <>
+          <BlurhashBackgroundImage
+            className={this.classes.blurredPlaceholder}
+            hash={this.blurhash}
+            isLoaded={isLoaded}
+          />
+        </>
+      )
+    } else {
+      return (
+        <LazyLoad {...this.lazyLoadBlurredOptions}>
+          <BlurhashBackgroundImage
+            className={this.classes.blurredPlaceholder}
+            hash={this.blurhash}
+            isLoaded={isLoaded}
+          />
+        </LazyLoad>
+      )
+    }
   }
 
   generateImage = () => {
@@ -117,7 +127,7 @@ class BackgroundImg extends React.Component<BackgroundImgProps, BackgroundImgSta
       )
     } else {
       return (
-        <LazyLoad height="100%" resize={true} once={true}>
+        <LazyLoad {...this.lazyLoadOptions}>
           <img style={{ display: 'none' }} src={this.generateCloudimageUrl(true)} onLoad={this.handleImageLoad} />
           <div
             className={clsx(this.classes.image)}
@@ -179,6 +189,26 @@ class BackgroundImg extends React.Component<BackgroundImgProps, BackgroundImgSta
 
   get noLazyLoad() {
     return this.props.noLazyLoad
+  }
+
+  get lazyLoadOptions() {
+    return {
+      height: '100%',
+      resize: true,
+      once: true,
+      ...this.props.lazyLoadOptions,
+    } as LazyLoadProps
+  }
+
+  get lazyLoadBlurredOptions() {
+    const extraOffset = 300
+
+    return {
+      ...this.lazyLoadOptions,
+      offset: Array.isArray(this.lazyLoadOptions.offset)
+        ? [this.lazyLoadOptions.offset[0] + extraOffset, this.lazyLoadOptions.offset[1] + extraOffset]
+        : (this.lazyLoadOptions.offset || 0) + extraOffset,
+    } as LazyLoadProps
   }
 
   get monitoredDimensions() {
