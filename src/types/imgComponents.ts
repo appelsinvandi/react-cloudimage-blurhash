@@ -2,6 +2,7 @@ import { CloudimageContextConfig } from '../components/CloudimageProvider'
 import { CloudimageFilters } from './cloudimageFilters'
 import { CloudimageOperations } from './cloudimageOperations'
 import { ComponentType } from '../constants'
+import { LazyLoadProps } from 'react-lazyload'
 
 export interface ImgBaseClasses {
   blurredPlaceholder?: string
@@ -18,6 +19,7 @@ export interface ImgBaseProps {
   config?: CloudimageContextConfig
   filters?: CloudimageFilters
   noLazyLoad?: boolean
+  lazyLoadOptions?: LazyLoadProps
   operations?: CloudimageOperations
   src: string
   type: ComponentType

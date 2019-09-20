@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 // Components
-import LazyLoad from 'react-lazyload'
+import LazyLoad, { LazyLoadProps } from 'react-lazyload'
 import { BlurhashCanvas } from 'react-blurhash'
 
 // Utils
@@ -91,17 +91,33 @@ class Img extends React.Component<ImgProps, ImgState> {
 
     const isLoaded = this.isImageLoaded || this.previousImageUrl != null
 
-    return (
-      <BlurhashCanvas
-        style={generateImgBlurredPlaceholderStyles(isLoaded)}
-        className={clsx(this.classes.blurredPlaceholder, {
-          'state__is-loaded': isLoaded,
-        })}
-        hash={this.blurhash}
-        width={32}
-        height={32}
-      />
-    )
+    if (this.noLazyLoad) {
+      return (
+        <BlurhashCanvas
+          style={generateImgBlurredPlaceholderStyles(isLoaded)}
+          className={clsx(this.classes.blurredPlaceholder, {
+            'state__is-loaded': isLoaded,
+          })}
+          hash={this.blurhash}
+          width={32}
+          height={32}
+        />
+      )
+    } else {
+      return (
+        <LazyLoad {...this.lazyLoadBlurredOptions}>
+          <BlurhashCanvas
+            style={generateImgBlurredPlaceholderStyles(isLoaded)}
+            className={clsx(this.classes.blurredPlaceholder, {
+              'state__is-loaded': isLoaded,
+            })}
+            hash={this.blurhash}
+            width={32}
+            height={32}
+          />
+        </LazyLoad>
+      )
+    }
   }
 
   generateImage = () => {
@@ -119,7 +135,7 @@ class Img extends React.Component<ImgProps, ImgState> {
       )
     } else {
       return (
-        <LazyLoad height="100%" resize={true} once={true}>
+        <LazyLoad {...this.lazyLoadOptions}>
           <img style={{ display: 'none' }} src={this.generateCloudimageUrl(true)} onLoad={this.handleImageLoad} />
           <img
             style={generateImgImageStyles()}
@@ -183,6 +199,26 @@ class Img extends React.Component<ImgProps, ImgState> {
 
   get noLazyLoad() {
     return this.props.noLazyLoad
+  }
+
+  get lazyLoadOptions() {
+    return {
+      height: '100%',
+      resize: true,
+      once: true,
+      ...this.props.lazyLoadOptions,
+    } as LazyLoadProps
+  }
+
+  get lazyLoadBlurredOptions() {
+    const extraOffset = 300
+
+    return {
+      ...this.lazyLoadOptions,
+      offset: Array.isArray(this.lazyLoadOptions.offset)
+        ? [this.lazyLoadOptions.offset[0] + extraOffset, this.lazyLoadOptions.offset[1] + extraOffset]
+        : (this.lazyLoadOptions.offset || 0) + extraOffset,
+    } as LazyLoadProps
   }
 
   get monitoredDimensions() {

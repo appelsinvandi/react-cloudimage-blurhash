@@ -21,12 +21,28 @@ The `<Img>` tag will load the image, and if provided with a blurhash, show a blu
         width: '100%',
       }}
     >
-      <Img src="sample.li/hotel.jpg" type={ComponentType.WIDTH_BOUND_RATIO} ratio={1 / 1} blurhash="LYJH,LyZER9FtSNfkXo#M|oLWCkC" />
-
-      <Img src="https://scaleflex.ultrafast.io/https://jolipage.airstore.io/121.jpg" type={ComponentType.WIDTH_BOUND_RATIO} ratio={1 / 1} blurhash="LFG8fyoy~A%N00vex^0z*0$eWAV@" />
-
-      <Img src="https://scaleflex.ultrafast.io/https://jolipage.airstore.io/img.jpg" type={ComponentType.WIDTH_BOUND_RATIO} ratio={1 / 1} blurhash="LZE:9@tnRjM{yZxut8oftpxtWARj" />
+      {new Array(100).fill(
+        <>
+          <Img
+            src="sample.li/hotel.jpg"
+            type={ComponentType.WIDTH_BOUND_RATIO}
+            ratio={1 / 1}
+            blurhash="LYJH,LyZER9FtSNfkXo#M|oLWCkC"
+          />
+          <Img
+            src="https://scaleflex.ultrafast.io/https://jolipage.airstore.io/121.jpg"
+            type={ComponentType.WIDTH_BOUND_RATIO}
+            ratio={1 / 1}
+            blurhash="LFG8fyoy~A%N00vex^0z*0$eWAV@"
+          />
+          <Img
+            src="https://scaleflex.ultrafast.io/https://jolipage.airstore.io/img.jpg"
+            type={ComponentType.WIDTH_BOUND_RATIO}
+            ratio={1 / 1}
+            blurhash="LZE:9@tnRjM{yZxut8oftpxtWARj"
+          />
+        </>
+      )}
     </div>
-
   </CloudimageProvider>
 </Playground>
