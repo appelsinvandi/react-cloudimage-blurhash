@@ -34,7 +34,7 @@
     "debounce": "~1.2.0",
     "element-resize-event": "~3.0.3",
     "react-blurhash": "~0.1.2",
-    "react-lazyload": "~2.6.2"
+    "react-lazyload": "~2.6.5"
   },
   "peerDependencies": {
     "react": "^16.9.0",
@@ -43,17 +43,17 @@
   "devDependencies": {
     "@types/debounce": "1.2.0",
     "@types/element-resize-event": "2.0.0",
-    "@types/prettier": "1.18.2",
-    "@types/react": "16.9.2",
-    "@types/react-dom": "16.9.0",
-    "@types/react-lazyload": "2.5.0",
+    "@types/prettier": "1.19.0",
+    "@types/react": "16.9.16",
+    "@types/react-dom": "16.9.4",
+    "@types/react-lazyload": "2.6.0",
     "docz": "1.2.0",
     "docz-theme-default": "1.2.0",
-    "husky": "3.0.5",
-    "prettier": "1.18.2",
-    "pretty-quick": "1.11.1",
+    "husky": "3.1.0",
+    "prettier": "1.19.1",
+    "pretty-quick": "2.0.1",
     "react": "16.9.0",
     "react-dom": "16.9.0",
-    "typescript": "3.6.2"
+    "typescript": "3.7.3"
   }
 }
