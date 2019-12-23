@@ -1,5 +1,11 @@
-export { BackgroundImg } from './components/BackgroundImg'
-export { CloudimageProvider } from './components/CloudimageProvider'
-export { Img } from './components/Img'
+export { ReactCloudimageProvider } from './components/ReactCloudimageProvider'
 
-export { ComponentType } from './constants'
+export {
+  BackgroundImgPlain,
+  BackgroundImgBlurhash,
+  BackgroundImgBlurhashWasm,
+  BackgroundImgTinyBlur,
+} from './components/BackgroundImg'
+export { ImgPlain, ImgBlurhash, ImgBlurhashWasm, ImgTinyBlur } from './components/Img'
+
+export { ImageSizingStrategy } from './constants'

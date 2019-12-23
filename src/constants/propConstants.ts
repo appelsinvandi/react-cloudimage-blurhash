@@ -1,6 +1,5 @@
-export enum ComponentType {
+export enum ImageSizingStrategy {
   FIT = 'FIT',
-  HEIGHT_BOUND_RATIO = 'HEIGHT_BOUND_RATIO',
   STATIC_DIMENSIONS = 'STATIC_DIMENSIONS',
-  WIDTH_BOUND_RATIO = 'WIDTH_BOUND_RATIO',
+  ASPECT_RATIO = 'ASPECT_RATIO',
 }

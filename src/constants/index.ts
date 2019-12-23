@@ -1,1 +1,1 @@
-export { ComponentType } from './propConstants'
+export { ImageSizingStrategy } from './propConstants'

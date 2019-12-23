@@ -1,16 +1,26 @@
 {
   "compilerOptions": {
-    "esModuleInterop": true,
-    "outDir": "dist",
-    "declaration": true,
-    "module": "commonjs",
-    "jsx": "react",
     "target": "es5",
-    "sourceMap": true,
-    "experimentalDecorators": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "jsx": "react",
+    "declaration": true,
+    "pretty": true,
+    "rootDir": "src",
+    "baseUrl": "src",
+    "sourceMap": false,
     "strict": true,
-    "strictPropertyInitialization": false,
+    "esModuleInterop": true,
     "noUnusedLocals": true,
-    "noUnusedParameters": true
-  }
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noImplicitAny": false,
+    "noFallthroughCasesInSwitch": true,
+    "outDir": "lib",
+    "lib": ["es2018", "dom"],
+    "importHelpers": true,
+    "skipLibCheck": true
+  },
+  "include": ["src/*"],
+  "exclude": ["node_modules", "lib", "esm"]
 }

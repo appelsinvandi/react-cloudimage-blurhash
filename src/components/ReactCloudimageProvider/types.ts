@@ -1,4 +1,11 @@
+import { LazyLoadProps } from 'react-lazyload'
 import { CloudimageFilters } from '../../types/cloudimageFilters'
+
+export interface ReactCloudimageContextValue {
+  cloudimageConfig: CloudimageContextConfig
+  theme?: ReactCloudimageThemeProperties
+  lazyLoadDefaults?: ReactCloudimageLazyLoadDefaults
+}
 
 export interface CloudimageContextConfig {
   /**
@@ -14,6 +21,11 @@ export interface CloudimageContextConfig {
   filters?: CloudimageFilters
 }
 
-export interface CloudimageContextValue {
-  config: CloudimageContextConfig
+export interface ReactCloudimageThemeProperties {
+  placeholderBackgroundColor?: string
+}
+
+export interface ReactCloudimageLazyLoadDefaults {
+  enabled?: boolean
+  options?: LazyLoadProps
 }
