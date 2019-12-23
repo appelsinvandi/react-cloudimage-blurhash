@@ -58,7 +58,7 @@ const PlaceholderBlurhash: React.FC<PlaceholderBlurhashProps & React.HTMLAttribu
       opacity: 1,
       '&.is-loaded': {
         opacity: 0,
-        transition: 'opacity .2s ease-in-out',
+        transition: 'opacity 0.3s ease-in-out 0s',
       },
     })
   }
