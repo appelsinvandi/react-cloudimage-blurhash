@@ -57,10 +57,10 @@ const PlaceholderBlurhashWasm: React.FC<PlaceholderBlurhashWasmProps & React.HTM
       zIndex: 10,
       width: '100%',
       height: '100%',
-      opacity: '1',
+      opacity: 1,
       '&.is-loaded': {
         opacity: 0,
-        transition: 'opacity .2s ease-in-out',
+        transition: 'opacity 0.3s ease-in-out 0s',
       },
     })
   }
