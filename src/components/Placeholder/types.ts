@@ -1,5 +1,5 @@
 export interface PlaceholderTinyBlurProps {
-  src: string
+  src?: string
   isMainImageLoaded: boolean
   classes?: PlaceholderClasses
 }

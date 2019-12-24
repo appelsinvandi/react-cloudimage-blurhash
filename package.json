@@ -27,8 +27,8 @@
     "blurhash"
   ],
   "scripts": {
-    "build:cjs": "tsc -p ./tsconfig.dev.json",
-    "build:es": "tsc -p ./tsconfig.dev.json -m esNext --outDir esm",
+    "build:cjs": "tsc -p ./tsconfig.json",
+    "build:es": "tsc -p ./tsconfig.json -m esNext --outDir esm",
     "build": "yarn build:cjs && yarn build:es",
     "prepublishOnly": "npm run build"
   },

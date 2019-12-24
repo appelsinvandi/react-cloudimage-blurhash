@@ -5,7 +5,6 @@
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "noImplicitReturns": false,
-    "noImplicitAny": false,
-    "noFallthroughCasesInSwitch": true
+    "noImplicitAny": false
   }
 }

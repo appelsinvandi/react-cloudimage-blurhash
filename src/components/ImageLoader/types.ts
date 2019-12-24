@@ -1,4 +1,4 @@
 export interface ImageLoaderProps {
-  src: string
+  src?: string
   onImageLoad: () => void
 }

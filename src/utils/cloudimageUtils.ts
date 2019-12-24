@@ -8,7 +8,7 @@ export function generateCloudimageUrl(
   token: string,
   componentProps: ImgBaseProps & ImgSizeTypeProps,
   componentDimensions: WidthAndHeight
-) {
+): string | undefined {
   const url = new URL(`https://${token}.cloudimg.io/v7/${componentProps.src}`)
 
   let width: number
@@ -29,6 +29,10 @@ export function generateCloudimageUrl(
       height = Math.ceil(componentDimensions.width * (1 / componentProps.ratio))
       width = componentDimensions.width
       break
+  }
+  // Images can't have these dimensions anyways
+  if (width <= 0 || height <= 0) {
+    return undefined
   }
   url.searchParams.append('height', String(getPixelDensityRegulatedValue(height)))
   url.searchParams.append('width', String(getPixelDensityRegulatedValue(width)))

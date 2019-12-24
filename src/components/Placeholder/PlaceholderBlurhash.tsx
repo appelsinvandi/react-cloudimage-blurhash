@@ -42,7 +42,7 @@ const PlaceholderBlurhash: React.FC<PlaceholderBlurhashProps & React.HTMLAttribu
         width="32"
       />
     ),
-    [classes, className, otherProps]
+    [classes, className, isMainImageLoaded, otherProps]
   )
 
   function generatePlaceholderImageCss() {
