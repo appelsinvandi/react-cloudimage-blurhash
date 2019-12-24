@@ -1,10 +1,10 @@
 export interface BackgroundImgProps {
-  src: string
+  src?: string
   classes?: DisplayImageClasses
 }
 
 export interface ImgProps {
-  src: string
+  src?: string
   classes?: DisplayImageClasses
 }
 

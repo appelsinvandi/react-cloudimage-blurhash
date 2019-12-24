@@ -24,46 +24,42 @@ const ImgPlain: React.FC<ImgPlainProps & ImgSizeTypeProps & React.HTMLAttributes
 
   const cloudimageUrl = generateCloudimageUrl(reactCloudimageContext.cloudimageConfig.token, props, componentSize)
 
-  return (
-    // @ts-ignore
-    <Wrapper
-      className={clsx(className, classes?.wrapper)}
-      type={type}
-      size={size}
-      ratio={ratio}
-      onSizeUpdate={setComponentSize}
-      {...otherProps}
-    >
-      <Content />
-    </Wrapper>
-  )
+  if (lazyLoad === true || (lazyLoad == null && reactCloudimageContext.lazyLoadDefaults?.enabled !== false)) {
+    return (
+      // @ts-ignore
+      <Wrapper
+        className={clsx(className, classes?.wrapper)}
+        type={type}
+        size={size}
+        ratio={ratio}
+        onSizeUpdate={setComponentSize}
+        {...otherProps}
+        key="WRAPPER"
+      >
+        <LazyLoad once {...generateLazyLoadProps()}>
+          <Img src={cloudimageUrl} className={clsx(classes?.image)} key="IMAGE" />
+        </LazyLoad>
+      </Wrapper>
+    )
+  } else {
+    return (
+      // @ts-ignore
+      <Wrapper
+        className={clsx(className, classes?.wrapper)}
+        type={type}
+        size={size}
+        ratio={ratio}
+        onSizeUpdate={setComponentSize}
+        {...otherProps}
+        key={'WRAPPER'}
+      >
+        <Img src={cloudimageUrl} className={clsx(classes?.image)} key="IMAGE" />
+      </Wrapper>
+    )
+  }
 
   function generateLazyLoadProps() {
     return { ...(reactCloudimageContext.lazyLoadDefaults?.options ?? {}), ...(lazyLoadOptions ?? {}) }
-  }
-
-  function Content() {
-    if (componentSize.width === 0 && componentSize.height === 0) {
-      return null
-    }
-
-    if (lazyLoad === true || (lazyLoad == null && reactCloudimageContext.lazyLoadDefaults?.enabled !== false)) {
-      return (
-        <LazyLoad once {...generateLazyLoadProps()}>
-          <ImgWithExtras />
-        </LazyLoad>
-      )
-    } else {
-      return <ImgWithExtras />
-    }
-
-    function ImgWithExtras() {
-      return (
-        <>
-          <Img src={cloudimageUrl} className={clsx(classes?.image)} />
-        </>
-      )
-    }
   }
 }
 

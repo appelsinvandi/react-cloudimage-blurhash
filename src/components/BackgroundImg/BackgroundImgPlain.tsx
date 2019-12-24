@@ -2,6 +2,7 @@ import React, { useContext, useState, memo } from 'react'
 
 // Components
 import LazyLoad from 'react-lazyload'
+import BackgroundContent from './BackgroundContent'
 import { BackgroundImg } from '../DisplayImage'
 import { Wrapper } from '../Wrapper'
 
@@ -26,48 +27,48 @@ const BackgroundImgPlain: React.FC<BackgroundImgPlainProps &
 
   const cloudimageUrl = generateCloudimageUrl(reactCloudimageContext.cloudimageConfig.token, props, componentSize)
 
-  return (
-    // @ts-ignore
-    <Wrapper
-      className={clsx(className, classes?.wrapper)}
-      type={type}
-      size={size}
-      ratio={ratio}
-      onSizeUpdate={setComponentSize}
-      {...otherProps}
-    >
-      <Content />
-    </Wrapper>
-  )
+  if (lazyLoad === true || (lazyLoad == null && reactCloudimageContext.lazyLoadDefaults?.enabled !== false)) {
+    return (
+      // @ts-ignore
+      <Wrapper
+        className={clsx(className, classes?.wrapper)}
+        type={type}
+        size={size}
+        ratio={ratio}
+        onSizeUpdate={setComponentSize}
+        {...otherProps}
+        key="WRAPPER"
+      >
+        <LazyLoad once {...generateLazyLoadProps()}>
+          <BackgroundImg src={cloudimageUrl} className={clsx(classes?.image)} key="IMAGE" />
+          <BackgroundContent className={clsx(classes?.content)} key="CONTENT">
+            {children}
+          </BackgroundContent>
+        </LazyLoad>
+      </Wrapper>
+    )
+  } else {
+    return (
+      // @ts-ignore
+      <Wrapper
+        className={clsx(className, classes?.wrapper)}
+        type={type}
+        size={size}
+        ratio={ratio}
+        onSizeUpdate={setComponentSize}
+        {...otherProps}
+        key={'WRAPPER'}
+      >
+        <BackgroundImg src={cloudimageUrl} className={clsx(classes?.image)} key="IMAGE" />
+        <BackgroundContent className={clsx(classes?.content)} key="CONTENT">
+          {children}
+        </BackgroundContent>
+      </Wrapper>
+    )
+  }
 
   function generateLazyLoadProps() {
     return { ...(reactCloudimageContext.lazyLoadDefaults?.options ?? {}), ...(lazyLoadOptions ?? {}) }
-  }
-
-  function Content() {
-    if (componentSize.width === 0 && componentSize.height === 0) {
-      return null
-    }
-
-    if (lazyLoad === true || (lazyLoad == null && reactCloudimageContext.lazyLoadDefaults?.enabled !== false)) {
-      return (
-        <LazyLoad once {...generateLazyLoadProps()}>
-          <ImgWithExtras />
-        </LazyLoad>
-      )
-    } else {
-      return <ImgWithExtras />
-    }
-
-    function ImgWithExtras() {
-      return (
-        <>
-          <BackgroundImg src={cloudimageUrl} className={clsx(classes?.image)}>
-            {children}
-          </BackgroundImg>
-        </>
-      )
-    }
   }
 }
 

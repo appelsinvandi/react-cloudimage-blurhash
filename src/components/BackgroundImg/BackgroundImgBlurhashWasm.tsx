@@ -1,5 +1,4 @@
 import React, { useContext, useState, memo } from 'react'
-import { useBoolean } from 'react-use'
 
 // Components
 import LazyLoad from 'react-lazyload'
@@ -26,62 +25,71 @@ const BackgroundImgBlurhashWasm: React.FC<BackgroundImgBlurhashProps &
   const { hash, src, type, size, ratio, lazyLoad, lazyLoadOptions, classes, className, children, ...otherProps } = props
 
   const reactCloudimageContext = useContext(ReactCloudimageContext)
-  const [isImageLoaded, setImageLoaded] = useBoolean(false)
   const [componentSize, setComponentSize] = useState({ width: 0, height: 0 })
+  const [isImageLoaded, setImageLoaded] = useState(false)
 
   const cloudimageUrl = generateCloudimageUrl(reactCloudimageContext.cloudimageConfig.token, props, componentSize)
 
-  return (
-    // @ts-ignore
-    <Wrapper
-      className={clsx(className, classes?.wrapper)}
-      type={type}
-      size={size}
-      ratio={ratio}
-      onSizeUpdate={setComponentSize}
-      {...otherProps}
-    >
-      <Content />
-    </Wrapper>
-  )
-
-  function handleImageLoad() {
-    setImageLoaded(true)
+  if (lazyLoad === true || (lazyLoad == null && reactCloudimageContext.lazyLoadDefaults?.enabled !== false)) {
+    return (
+      // @ts-ignore
+      <Wrapper
+        className={clsx(className, classes?.wrapper)}
+        type={type}
+        size={size}
+        ratio={ratio}
+        onSizeUpdate={setComponentSize}
+        {...otherProps}
+        key="WRAPPER"
+      >
+        <LazyLoad once {...generateLazyLoadProps()}>
+          <PlaceholderBlurhashWasm
+            hash={hash}
+            isMainImageLoaded={isImageLoaded}
+            className={clsx(classes?.placeholder)}
+            key="PLACEHOLDER"
+          />
+          <ImageLoader src={cloudimageUrl} onImageLoad={handleImageLoad} key="IMAGE_LOADER" />
+          <BackgroundImg src={cloudimageUrl} className={clsx(classes?.image)} key="IMAGE" />
+          <BackgroundContent className={clsx(classes?.content)} key="CONTENT">
+            {children}
+          </BackgroundContent>
+        </LazyLoad>
+      </Wrapper>
+    )
+  } else {
+    return (
+      // @ts-ignore
+      <Wrapper
+        className={clsx(className, classes?.wrapper)}
+        type={type}
+        size={size}
+        ratio={ratio}
+        onSizeUpdate={setComponentSize}
+        {...otherProps}
+        key={'WRAPPER'}
+      >
+        <PlaceholderBlurhashWasm
+          hash={hash}
+          isMainImageLoaded={isImageLoaded}
+          className={clsx(classes?.placeholder)}
+          key="PLACEHOLDER"
+        />
+        <ImageLoader src={cloudimageUrl} onImageLoad={handleImageLoad} key="IMAGE_LOADER" />
+        <BackgroundImg src={cloudimageUrl} className={clsx(classes?.image)} key="IMAGE" />
+        <BackgroundContent className={clsx(classes?.content)} key="CONTENT">
+          {children}
+        </BackgroundContent>
+      </Wrapper>
+    )
   }
 
   function generateLazyLoadProps() {
     return { ...(reactCloudimageContext.lazyLoadDefaults?.options ?? {}), ...(lazyLoadOptions ?? {}) }
   }
 
-  function Content() {
-    if (componentSize.width === 0 && componentSize.height === 0) {
-      return null
-    }
-
-    if (lazyLoad === true || (lazyLoad == null && reactCloudimageContext.lazyLoadDefaults?.enabled !== false)) {
-      return (
-        <LazyLoad once {...generateLazyLoadProps()}>
-          <ImgWithExtras />
-        </LazyLoad>
-      )
-    } else {
-      return <ImgWithExtras />
-    }
-
-    function ImgWithExtras() {
-      return (
-        <>
-          <PlaceholderBlurhashWasm
-            hash={hash}
-            isMainImageLoaded={isImageLoaded}
-            className={clsx(classes?.placeholder)}
-          />
-          <ImageLoader src={cloudimageUrl} onImageLoad={handleImageLoad} />
-          <BackgroundImg src={cloudimageUrl} className={clsx(classes?.image)} />
-          <BackgroundContent className={clsx(classes?.content)}>{children}</BackgroundContent>
-        </>
-      )
-    }
+  function handleImageLoad() {
+    setImageLoaded(true)
   }
 }
 

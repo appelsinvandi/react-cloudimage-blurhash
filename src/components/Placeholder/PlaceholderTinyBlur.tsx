@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, memo } from 'react'
+import React, { useRef, useEffect, memo, useMemo } from 'react'
 import { useCss } from 'react-use'
 
 // Utils
@@ -9,6 +9,11 @@ import { PlaceholderTinyBlurProps } from './types'
 
 const PlaceholderTinyBlur: React.FC<PlaceholderTinyBlurProps & React.HTMLAttributes<HTMLImageElement>> = (props) => {
   const { src, isMainImageLoaded, className, classes, ...otherProps } = props
+
+  // Skip render if the src is missing (invalid)
+  if (src == null) {
+    return null
+  }
 
   const componentRef = useRef<HTMLDivElement>(null)
   const [imgDimensions, setImgDimensions] = React.useState({ width: 0, height: 0 })
@@ -26,15 +31,17 @@ const PlaceholderTinyBlur: React.FC<PlaceholderTinyBlurProps & React.HTMLAttribu
     placeholderImage: generatePlaceholderImageCss(),
   }
 
-  return (
-    // @ts-ignore
-    <img
-      {...otherProps}
-      className={clsx(css.placeholderImage, className, classes?.placeholderImage, {
-        'is-loaded': isMainImageLoaded,
-      })}
-      src={src}
-    />
+  return useMemo(
+    () => (
+      <img
+        className={clsx(css.placeholderImage, className, classes?.placeholderImage, {
+          'is-loaded': isMainImageLoaded,
+        })}
+        src={src}
+        {...otherProps}
+      />
+    ),
+    [classes, className, isMainImageLoaded, otherProps]
   )
 
   function generatePlaceholderImageCss() {

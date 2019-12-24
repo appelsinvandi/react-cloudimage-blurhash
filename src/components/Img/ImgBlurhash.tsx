@@ -20,7 +20,7 @@ import { ImgBlurhashProps } from './types'
 import { ImgSizeTypeProps } from '../../types/imgComponents'
 
 const ImgBlurhash: React.FC<ImgBlurhashProps & ImgSizeTypeProps & React.HTMLAttributes<HTMLDivElement>> = (props) => {
-  const { hash, src, type, size, ratio, lazyLoad, lazyLoadOptions, classes, className, children, ...otherProps } = props
+  const { hash, src, type, size, ratio, lazyLoad, lazyLoadOptions, classes, className, ...otherProps } = props
 
   const reactCloudimageContext = useContext(ReactCloudimageContext)
   const [isImageLoaded, setImageLoaded] = useBoolean(false)
@@ -28,19 +28,53 @@ const ImgBlurhash: React.FC<ImgBlurhashProps & ImgSizeTypeProps & React.HTMLAttr
 
   const cloudimageUrl = generateCloudimageUrl(reactCloudimageContext.cloudimageConfig.token, props, componentSize)
 
-  return (
-    // @ts-ignore
-    <Wrapper
-      className={clsx(className, classes?.wrapper)}
-      type={type}
-      size={size}
-      ratio={ratio}
-      onSizeUpdate={setComponentSize}
-      {...otherProps}
-    >
-      <Content />
-    </Wrapper>
-  )
+  if (lazyLoad === true || (lazyLoad == null && reactCloudimageContext.lazyLoadDefaults?.enabled !== false)) {
+    return (
+      // @ts-ignore
+      <Wrapper
+        className={clsx(className, classes?.wrapper)}
+        type={type}
+        size={size}
+        ratio={ratio}
+        onSizeUpdate={setComponentSize}
+        {...otherProps}
+        key="WRAPPER"
+      >
+        <LazyLoad once {...generateLazyLoadProps()}>
+          <PlaceholderBlurhash
+            hash={hash}
+            isMainImageLoaded={isImageLoaded}
+            className={clsx(classes?.placeholder)}
+            key="PLACEHOLDER"
+          />
+          <ImageLoader src={cloudimageUrl} onImageLoad={handleImageLoad} key="IMAGE_LOADER" />
+          <Img src={cloudimageUrl} className={clsx(classes?.image)} key="IMAGE" />
+        </LazyLoad>
+      </Wrapper>
+    )
+  } else {
+    return (
+      // @ts-ignore
+      <Wrapper
+        className={clsx(className, classes?.wrapper)}
+        type={type}
+        size={size}
+        ratio={ratio}
+        onSizeUpdate={setComponentSize}
+        {...otherProps}
+        key={'WRAPPER'}
+      >
+        <PlaceholderBlurhash
+          hash={hash}
+          isMainImageLoaded={isImageLoaded}
+          className={clsx(classes?.placeholder)}
+          key="PLACEHOLDER"
+        />
+        <ImageLoader src={cloudimageUrl} onImageLoad={handleImageLoad} key="IMAGE_LOADER" />
+        <Img src={cloudimageUrl} className={clsx(classes?.image)} key="IMAGE" />
+      </Wrapper>
+    )
+  }
 
   function handleImageLoad() {
     setImageLoaded(true)
@@ -48,32 +82,6 @@ const ImgBlurhash: React.FC<ImgBlurhashProps & ImgSizeTypeProps & React.HTMLAttr
 
   function generateLazyLoadProps() {
     return { ...(reactCloudimageContext.lazyLoadDefaults?.options ?? {}), ...(lazyLoadOptions ?? {}) }
-  }
-
-  function Content() {
-    if (componentSize.width === 0 && componentSize.height === 0) {
-      return null
-    }
-
-    if (lazyLoad === true || (lazyLoad == null && reactCloudimageContext.lazyLoadDefaults?.enabled !== false)) {
-      return (
-        <LazyLoad once {...generateLazyLoadProps()}>
-          <ImgWithExtras />
-        </LazyLoad>
-      )
-    } else {
-      return <ImgWithExtras />
-    }
-
-    function ImgWithExtras() {
-      return (
-        <>
-          <PlaceholderBlurhash hash={hash} isMainImageLoaded={isImageLoaded} className={clsx(classes?.placeholder)} />
-          <ImageLoader src={cloudimageUrl} onImageLoad={handleImageLoad} />
-          <Img src={cloudimageUrl} className={clsx(classes?.image)} />
-        </>
-      )
-    }
   }
 }
 
