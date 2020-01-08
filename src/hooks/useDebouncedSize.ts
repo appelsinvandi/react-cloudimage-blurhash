@@ -1,5 +1,6 @@
-import { useDebounce, useMeasure } from 'react-use'
 import { useState } from 'react'
+import useDebounce from 'react-use/lib/useDebounce'
+import useMeasure from 'react-use/lib/useMeasure'
 
 // Types
 import { WidthAndHeight } from '../types/imgComponents'
