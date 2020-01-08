@@ -65,7 +65,7 @@ const Wrapper: React.FC<WrapperProps & ImgSizeTypeProps & React.HTMLAttributes<H
           ...cssBase,
           width: '100%',
           height: 0,
-          paddingTop: `${100 * (1 / ratio!)}%`,
+          paddingBottom: `${100 * (1 / ratio!)}%`,
         })
     }
   }
