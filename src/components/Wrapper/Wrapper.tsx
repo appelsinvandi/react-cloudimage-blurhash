@@ -1,5 +1,5 @@
 import React, { memo } from 'react'
-import { useCss } from 'react-use'
+import cxs from 'cxs'
 import { useSizeDebounce } from '../../hooks'
 
 // Constants
@@ -40,21 +40,21 @@ const Wrapper: React.FC<WrapperProps & ImgSizeTypeProps & React.HTMLAttributes<H
     switch (type) {
       default:
       case ImageSizingStrategy.FIT:
-        return useCss({
+        return cxs({
           ...cssBase,
           width: '100%',
           height: '100%',
         })
 
       case ImageSizingStrategy.STATIC_DIMENSIONS:
-        return useCss({
+        return cxs({
           ...cssBase,
           width: `${typeof size === 'number' ? size! : size!.width}px`,
           height: `${typeof size === 'number' ? size! : size!.height}px`,
         })
 
       case ImageSizingStrategy.ASPECT_RATIO:
-        return useCss({
+        return cxs({
           ...cssBase,
           width: '100%',
           height: 0,

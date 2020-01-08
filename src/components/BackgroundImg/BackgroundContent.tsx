@@ -1,5 +1,5 @@
 import React from 'react'
-import { useCss } from 'react-use'
+import cxs from 'cxs'
 
 // Utils
 import clsx from 'clsx'
@@ -14,17 +14,7 @@ const BackgroundContent: React.FC<BackgroundContentProps & React.HTMLAttributes<
   ...otherProps
 }) => {
   const css = {
-    content: generateContentCss(),
-  }
-
-  return (
-    <div className={clsx(css.content, className, classes?.contentElement)} {...otherProps}>
-      {children}
-    </div>
-  )
-
-  function generateContentCss() {
-    return useCss({
+    content: cxs({
       position: 'absolute',
       top: 0,
       right: 0,
@@ -33,8 +23,14 @@ const BackgroundContent: React.FC<BackgroundContentProps & React.HTMLAttributes<
       zIndex: 20,
       width: '100%',
       height: '100%',
-    })
+    }),
   }
+
+  return (
+    <div className={clsx(css.content, className, classes?.contentElement)} {...otherProps}>
+      {children}
+    </div>
+  )
 }
 
 export default BackgroundContent
