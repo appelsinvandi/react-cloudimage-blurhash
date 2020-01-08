@@ -1,4 +1,4 @@
-import React, { useContext, memo } from 'react'
+import React, { memo } from 'react'
 import cxs from 'cxs'
 
 // Utils
@@ -9,8 +9,6 @@ import { ImgProps } from './types'
 
 const Img: React.FC<ImgProps & React.HTMLAttributes<HTMLImageElement>> = (props) => {
   const { src, classes, className, ...otherProps } = props
-
-  const reactCloudimageBlurhashContext = useContext(ReactCloudimageContext)
 
   const css = {
     image: cxs({

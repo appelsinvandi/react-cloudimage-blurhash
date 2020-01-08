@@ -1,9 +1,6 @@
 import React, { memo } from 'react'
 import cxs from 'cxs'
 
-// Context
-import { ReactCloudimageContext } from '../ReactCloudimageProvider'
-
 // Utils
 import clsx from 'clsx'
 
@@ -12,8 +9,6 @@ import { BackgroundImgProps } from './types'
 
 const BackgroundImg: React.FC<BackgroundImgProps & React.HTMLAttributes<HTMLDivElement>> = (props) => {
   const { src, classes, children, className, ...otherProps } = props
-
-  const reactCloudimageBlurhashContext = useContext(ReactCloudimageContext)
 
   const css = {
     image: cxs({
