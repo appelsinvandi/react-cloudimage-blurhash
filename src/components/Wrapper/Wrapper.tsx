@@ -39,6 +39,7 @@ const Wrapper: React.FC<WrapperProps & ImgSizeTypeProps & React.HTMLAttributes<H
   function generateWrapperCss(): string {
     const cssBase = {
       position: 'relative',
+      zIndex: 0,
       overflow: 'hidden',
       backgroundColor: reactCloudimageBlurhashContext.theme?.placeholderBackgroundColor ?? 'lightgrey',
     }
