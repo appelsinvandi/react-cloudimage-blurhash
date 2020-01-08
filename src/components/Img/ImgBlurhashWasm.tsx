@@ -1,5 +1,4 @@
 import React, { useContext, useState, memo } from 'react'
-import { useBoolean } from 'react-use'
 
 // Components
 import LazyLoad from 'react-lazyload'
@@ -25,7 +24,7 @@ const ImgBlurhashWasm: React.FC<ImgBlurhashProps & ImgSizeTypeProps & React.HTML
   const { hash, src, type, size, ratio, lazyLoad, lazyLoadOptions, classes, className, children, ...otherProps } = props
 
   const reactCloudimageContext = useContext(ReactCloudimageContext)
-  const [isImageLoaded, setImageLoaded] = useBoolean(false)
+  const [isImageLoaded, setImageLoaded] = useState(false)
   const [componentSize, setComponentSize] = useState({ width: 0, height: 0 })
 
   const cloudimageUrl = generateCloudimageUrl(reactCloudimageContext.cloudimageConfig.token, props, componentSize)
