@@ -1,8 +1,5 @@
-import React, { useContext, memo } from 'react'
-import { useCss } from 'react-use'
-
-// Context
-import { ReactCloudimageContext } from '../ReactCloudimageProvider'
+import React, { memo } from 'react'
+import cxs from 'cxs'
 
 // Utils
 import clsx from 'clsx'
@@ -13,16 +10,8 @@ import { ImgProps } from './types'
 const Img: React.FC<ImgProps & React.HTMLAttributes<HTMLImageElement>> = (props) => {
   const { src, classes, className, ...otherProps } = props
 
-  const reactCloudimageBlurhashContext = useContext(ReactCloudimageContext)
-
   const css = {
-    image: generateImageCss(),
-  }
-
-  return <img src={src} className={clsx(css.image, className, classes?.imageElement)} {...otherProps} />
-
-  function generateImageCss() {
-    return useCss({
+    image: cxs({
       position: 'absolute',
       top: 0,
       right: 0,
@@ -31,9 +20,10 @@ const Img: React.FC<ImgProps & React.HTMLAttributes<HTMLImageElement>> = (props)
       zIndex: 0,
       width: '100%',
       height: '100%',
-      backgroundColor: reactCloudimageBlurhashContext.theme?.placeholderBackgroundColor ?? 'lightgrey',
-    })
+    }),
   }
+
+  return <img src={src} className={clsx(css.image, className, classes?.imageElement)} {...otherProps} />
 }
 
 export default memo(Img)

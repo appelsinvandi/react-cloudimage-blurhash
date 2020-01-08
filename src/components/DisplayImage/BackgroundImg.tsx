@@ -1,8 +1,5 @@
-import React, { useContext, memo } from 'react'
-import { useCss } from 'react-use'
-
-// Context
-import { ReactCloudimageContext } from '../ReactCloudimageProvider'
+import React, { memo } from 'react'
+import cxs from 'cxs'
 
 // Utils
 import clsx from 'clsx'
@@ -11,29 +8,10 @@ import clsx from 'clsx'
 import { BackgroundImgProps } from './types'
 
 const BackgroundImg: React.FC<BackgroundImgProps & React.HTMLAttributes<HTMLDivElement>> = (props) => {
-  const { src, classes, children, style, className, ...otherProps } = props
-
-  const reactCloudimageBlurhashContext = useContext(ReactCloudimageContext)
+  const { src, classes, children, className, ...otherProps } = props
 
   const css = {
-    image: generateImageCss(),
-  }
-
-  return (
-    <div
-      className={clsx(css.image, className, classes?.imageElement)}
-      style={{
-        ...style,
-        backgroundImage: `url("${src}")`,
-      }}
-      {...otherProps}
-    >
-      {children}
-    </div>
-  )
-
-  function generateImageCss() {
-    return useCss({
+    image: cxs({
       position: 'absolute',
       top: 0,
       right: 0,
@@ -42,12 +20,18 @@ const BackgroundImg: React.FC<BackgroundImgProps & React.HTMLAttributes<HTMLDivE
       zIndex: 0,
       width: '100%',
       height: '100%',
-      backgroundColor: reactCloudimageBlurhashContext.theme?.placeholderBackgroundColor ?? 'lightgrey',
+      backgroundImage: `url("${src}")`,
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       backgroundRepeat: 'none',
-    })
+    }),
   }
+
+  return (
+    <div className={clsx(css.image, className, classes?.imageElement)} {...otherProps}>
+      {children}
+    </div>
+  )
 }
 
 export default memo(BackgroundImg)

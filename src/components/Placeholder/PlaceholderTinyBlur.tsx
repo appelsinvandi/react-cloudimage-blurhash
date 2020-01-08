@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, memo, useMemo } from 'react'
-import { useCss } from 'react-use'
+import cxs from 'cxs'
 
 // Utils
 import clsx from 'clsx'
@@ -28,7 +28,22 @@ const PlaceholderTinyBlur: React.FC<PlaceholderTinyBlurProps & React.HTMLAttribu
   })
 
   const css = {
-    placeholderImage: generatePlaceholderImageCss(),
+    placeholderImage: cxs({
+      position: 'absolute',
+      top: '0',
+      right: '0',
+      bottom: '0',
+      left: '0',
+      zIndex: 10,
+      width: '100%',
+      height: '100%',
+      filter: 'blur(10px)',
+      opacity: 1,
+      '.is-loaded': {
+        opacity: 0,
+        transition: 'opacity 0.3s ease-in-out 0s',
+      },
+    }),
   }
 
   return useMemo(
@@ -43,25 +58,6 @@ const PlaceholderTinyBlur: React.FC<PlaceholderTinyBlurProps & React.HTMLAttribu
     ),
     [classes, className, isMainImageLoaded, otherProps]
   )
-
-  function generatePlaceholderImageCss() {
-    return useCss({
-      position: 'absolute',
-      top: '0',
-      right: '0',
-      bottom: '0',
-      left: '0',
-      zIndex: 10,
-      width: '100%',
-      height: '100%',
-      filter: 'blur(10px)',
-      opacity: 1,
-      '&.is-loaded': {
-        opacity: 0,
-        transition: 'opacity 0.3s ease-in-out 0s',
-      },
-    })
-  }
 }
 
 export default memo(PlaceholderTinyBlur)

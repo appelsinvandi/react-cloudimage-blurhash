@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react'
-import { useCss } from 'react-use'
+import cxs from 'cxs'
 
 // Utils
 import clsx from 'clsx'
@@ -27,26 +27,28 @@ const PlaceholderBlurhashWasm: React.FC<PlaceholderBlurhashWasmProps & React.HTM
     }
   })
 
-  const css = useCss({
-    position: 'absolute',
-    top: 0,
-    right: 0,
-    bottom: 0,
-    left: 0,
-    zIndex: 10,
-    width: '100%',
-    height: '100%',
-    opacity: 1,
-    '&.is-loaded': {
-      opacity: 0,
-      transition: 'opacity 0.3s ease-in-out 0s',
-    },
-  })
+  const css = {
+    placeholderImage: cxs({
+      position: 'absolute',
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0,
+      zIndex: 10,
+      width: '100%',
+      height: '100%',
+      opacity: 1,
+      '.is-loaded': {
+        opacity: 0,
+        transition: 'opacity 0.3s ease-in-out 0s',
+      },
+    }),
+  }
 
   return (
     <canvas
       ref={blurhashCanvas}
-      className={clsx(css, className, classes?.placeholderImage, {
+      className={clsx(css.placeholderImage, className, classes?.placeholderImage, {
         'is-loaded': isMainImageLoaded,
       })}
       {...otherProps}
