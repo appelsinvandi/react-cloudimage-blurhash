@@ -1,6 +1,6 @@
 {
   "name": "react-cloudimage-blurhash",
-  "version": "2.3.1",
+  "version": "2.3.2",
   "description": "",
   "main": "lib/index.js",
   "module": "esm/index.js",
