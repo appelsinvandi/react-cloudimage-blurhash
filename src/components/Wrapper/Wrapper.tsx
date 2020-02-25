@@ -22,7 +22,7 @@ const Wrapper: React.FC<WrapperProps & ImgSizeTypeProps & React.HTMLAttributes<H
   })
 
   const css = {
-    wrapper: generateWrapperCss(),
+    wrapper: cxs(generateWrapperCss()),
   }
 
   return (
@@ -31,7 +31,7 @@ const Wrapper: React.FC<WrapperProps & ImgSizeTypeProps & React.HTMLAttributes<H
     </div>
   )
 
-  function generateWrapperCss(): string {
+  function generateWrapperCss(): object {
     const cssBase = {
       position: 'relative',
       zIndex: 0,
@@ -41,26 +41,26 @@ const Wrapper: React.FC<WrapperProps & ImgSizeTypeProps & React.HTMLAttributes<H
     switch (type) {
       default:
       case ImageSizingStrategy.FIT:
-        return cxs({
+        return {
           ...cssBase,
           width: '100%',
           height: '100%',
-        })
+        }
 
       case ImageSizingStrategy.STATIC_DIMENSIONS:
-        return cxs({
+        return {
           ...cssBase,
           width: `${typeof size === 'number' ? size! : size!.width}px`,
           height: `${typeof size === 'number' ? size! : size!.height}px`,
-        })
+        }
 
       case ImageSizingStrategy.ASPECT_RATIO:
-        return cxs({
+        return {
           ...cssBase,
           width: '100%',
           height: 0,
           paddingBottom: `${100 * (1 / ratio!)}%`,
-        })
+        }
     }
   }
 }
