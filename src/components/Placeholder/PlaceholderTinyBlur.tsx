@@ -1,5 +1,8 @@
-import React, { useRef, useEffect, memo, useMemo } from 'react'
+import React, { useRef, useEffect, memo, useMemo, useContext } from 'react'
 import cxs from 'cxs'
+
+// Context
+import { ReactCloudimageContext } from '../ReactCloudimageProvider'
 
 // Utils
 import clsx from 'clsx'
@@ -9,6 +12,7 @@ import { PlaceholderTinyBlurProps } from './types'
 
 const PlaceholderTinyBlur: React.FC<PlaceholderTinyBlurProps & React.HTMLAttributes<HTMLImageElement>> = (props) => {
   const { src, isMainImageLoaded, className, classes, ...otherProps } = props
+  const reactCloudimageBlurhashContext = useContext(ReactCloudimageContext)
 
   // Skip render if the src is missing (invalid)
   if (src == null) {
@@ -39,6 +43,7 @@ const PlaceholderTinyBlur: React.FC<PlaceholderTinyBlurProps & React.HTMLAttribu
       height: '100%',
       filter: 'blur(10px)',
       opacity: 1,
+      backgroundColor: reactCloudimageBlurhashContext.theme?.placeholderBackgroundColor ?? 'lightgrey',
       '.is-loaded': {
         opacity: 0,
         transition: 'opacity 0.3s ease-in-out 0s',

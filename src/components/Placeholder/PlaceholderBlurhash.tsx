@@ -1,5 +1,8 @@
-import React, { useEffect, useRef, useMemo } from 'react'
+import React, { useEffect, useRef, useMemo, useContext } from 'react'
 import cxs from 'cxs'
+
+// Context
+import { ReactCloudimageContext } from '../ReactCloudimageProvider'
 
 // Utils
 import clsx from 'clsx'
@@ -10,6 +13,7 @@ import { PlaceholderBlurhashProps } from './types'
 
 const PlaceholderBlurhash: React.FC<PlaceholderBlurhashProps & React.HTMLAttributes<HTMLCanvasElement>> = (props) => {
   const { hash, isMainImageLoaded, classes, className, ...otherProps } = props
+  const reactCloudimageBlurhashContext = useContext(ReactCloudimageContext)
 
   const blurhashCanvas = useRef<HTMLCanvasElement>(null)
 
@@ -37,6 +41,7 @@ const PlaceholderBlurhash: React.FC<PlaceholderBlurhashProps & React.HTMLAttribu
       width: '100%',
       height: '100%',
       opacity: 1,
+      backgroundColor: reactCloudimageBlurhashContext.theme?.placeholderBackgroundColor ?? 'lightgrey',
       '.is-loaded': {
         opacity: 0,
         transition: 'opacity 0.3s ease-in-out 0s',
