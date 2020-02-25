@@ -1,5 +1,8 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useMemo, useContext } from 'react'
 import cxs from 'cxs'
+
+// Context
+import { ReactCloudimageContext } from '../ReactCloudimageProvider'
 
 // Utils
 import clsx from 'clsx'
@@ -12,6 +15,7 @@ const PlaceholderBlurhashWasm: React.FC<PlaceholderBlurhashWasmProps & React.HTM
   props
 ) => {
   const { hash, isMainImageLoaded, classes, className, ...otherProps } = props
+  const reactCloudimageBlurhashContext = useContext(ReactCloudimageContext)
 
   const blurhashCanvas = useRef<HTMLCanvasElement>(null)
   useEffect(() => {
@@ -38,6 +42,7 @@ const PlaceholderBlurhashWasm: React.FC<PlaceholderBlurhashWasmProps & React.HTM
       width: '100%',
       height: '100%',
       opacity: 1,
+      backgroundColor: reactCloudimageBlurhashContext.theme?.placeholderBackgroundColor ?? 'lightgrey',
       '.is-loaded': {
         opacity: 0,
         transition: 'opacity 0.3s ease-in-out 0s',
@@ -45,16 +50,19 @@ const PlaceholderBlurhashWasm: React.FC<PlaceholderBlurhashWasmProps & React.HTM
     }),
   }
 
-  return (
-    <canvas
-      ref={blurhashCanvas}
-      className={clsx(css.placeholderImage, className, classes?.placeholderImage, {
-        'is-loaded': isMainImageLoaded,
-      })}
-      {...otherProps}
-      height="32"
-      width="32"
-    />
+  return useMemo(
+    () => (
+      <canvas
+        ref={blurhashCanvas}
+        className={clsx(css.placeholderImage, className, classes?.placeholderImage, {
+          'is-loaded': isMainImageLoaded,
+        })}
+        {...otherProps}
+        height="32"
+        width="32"
+      />
+    ),
+    [classes, className, isMainImageLoaded, otherProps]
   )
 }
 

@@ -1,9 +1,6 @@
-import React, { memo, useContext } from 'react'
+import React, { memo } from 'react'
 import cxs from 'cxs'
 import { useSizeDebounce } from '../../hooks'
-
-// Context
-import { ReactCloudimageContext } from '../ReactCloudimageProvider'
 
 // Constants
 import { ImageSizingStrategy } from '../../constants'
@@ -17,8 +14,6 @@ import { ImgSizeTypeProps } from '../../types/imgComponents'
 
 const Wrapper: React.FC<WrapperProps & ImgSizeTypeProps & React.HTMLAttributes<HTMLDivElement>> = (props) => {
   const { classes, type, size, ratio, onSizeUpdate, children, className, ...otherProps } = props
-
-  const reactCloudimageBlurhashContext = useContext(ReactCloudimageContext)
 
   const wrapperElementRef = useSizeDebounce((size) => {
     if (onSizeUpdate) {
@@ -41,7 +36,6 @@ const Wrapper: React.FC<WrapperProps & ImgSizeTypeProps & React.HTMLAttributes<H
       position: 'relative',
       zIndex: 0,
       overflow: 'hidden',
-      backgroundColor: reactCloudimageBlurhashContext.theme?.placeholderBackgroundColor ?? 'lightgrey',
     }
 
     switch (type) {
