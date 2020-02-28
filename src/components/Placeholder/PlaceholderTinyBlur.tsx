@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, memo, useMemo, useContext } from 'react'
+import React, { useRef, useEffect, memo, useMemo, useContext, useState } from 'react'
 import cxs from 'cxs'
 
 // Context
@@ -14,13 +14,8 @@ const PlaceholderTinyBlur: React.FC<PlaceholderTinyBlurProps & React.HTMLAttribu
   const { src, isMainImageLoaded, className, classes, ...otherProps } = props
   const reactCloudimageBlurhashContext = useContext(ReactCloudimageContext)
 
-  // Skip render if the src is missing (invalid)
-  if (src == null) {
-    return null
-  }
-
   const componentRef = useRef<HTMLDivElement>(null)
-  const [imgDimensions, setImgDimensions] = React.useState({ width: 0, height: 0 })
+  const [imgDimensions, setImgDimensions] = useState({ width: 0, height: 0 })
 
   useEffect(() => {
     const width = Math.floor((componentRef.current?.clientWidth || 0) / 10)
@@ -30,6 +25,11 @@ const PlaceholderTinyBlur: React.FC<PlaceholderTinyBlurProps & React.HTMLAttribu
       setImgDimensions({ width, height })
     }
   })
+
+  // Skip render if the src is missing (invalid)
+  if (src == null) {
+    return null
+  }
 
   const css = {
     placeholderImage: cxs({
