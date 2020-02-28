@@ -30,6 +30,11 @@
   resolved "https://registry.yarnpkg.com/@types/color-name/-/color-name-1.1.1.tgz#1c1261bbeaa10a8055bbc5d8ab84b7b2afc846a0"
   integrity sha512-rr+OQyAjxze7GgWrSaJwydHStIhHq2lvY3BOC2Mj7KnzI7XK0Uw1TOOdI9lDoajEbSWLiYgoo4f1R51erQfhPQ==
 
+"@types/js-cookie@2.2.5":
+  version "2.2.5"
+  resolved "https://registry.yarnpkg.com/@types/js-cookie/-/js-cookie-2.2.5.tgz#38dfaacae8623b37cc0b0d27398e574e3fc28b1e"
+  integrity sha512-cpmwBRcHJmmZx0OGU7aPVwGWGbs4iKwVYchk9iuMtxNCA2zorwdaTz4GkLgs2WGxiRZRFKnV1k6tRUHX7tBMxg==
+
 "@types/minimatch@^3.0.3":
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/@types/minimatch/-/minimatch-3.0.3.tgz#3dca0e3f33b200fc7d1139c0cd96c1268cadfd9d"
@@ -72,10 +77,10 @@
     "@types/prop-types" "*"
     csstype "^2.2.0"
 
-"@xobotyi/scrollbar-width@1.5.0":
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/@xobotyi/scrollbar-width/-/scrollbar-width-1.5.0.tgz#488210bff634548040dc22a72f62722a85b134e1"
-  integrity sha512-BK+HR1D00F2xh7n4+5en8/dMkG13uvIXLmEbsjtc1702b7+VwXkvlBDKoRPJMbkRN5hD7VqWa3nS9fNT8JG3CA==
+"@xobotyi/scrollbar-width@1.9.3":
+  version "1.9.3"
+  resolved "https://registry.yarnpkg.com/@xobotyi/scrollbar-width/-/scrollbar-width-1.9.3.tgz#76a82f3a3452967cf05509e472c6e154804ba07d"
+  integrity sha512-15JdCA3BjDktOdJ9xRdxkZcd2ZiHHbb3ycSPtC9JCjwkHzvrPr3n8uZoNw9CYF6UhkIMnW85d+P9mi3eXaKcFg==
 
 ansi-styles@^3.2.1:
   version "3.2.1"
@@ -295,6 +300,16 @@ execa@^2.1.0:
     signal-exit "^3.0.2"
     strip-final-newline "^2.0.0"
 
+fast-deep-equal@^3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/fast-deep-equal/-/fast-deep-equal-3.1.1.tgz#545145077c501491e33b15ec408c294376e94ae4"
+  integrity sha512-8UEa58QDLauDNfpbrX55Q9jrGHThw2ZMdOky5Gl1CDtVeJDPVrG4Jxx1N8jw2gkWaff5UUuX1KJd+9zGe2B+ZA==
+
+fast-shallow-equal@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/fast-shallow-equal/-/fast-shallow-equal-1.0.0.tgz#d4dcaf6472440dcefa6f88b98e3251e27f25628b"
+  integrity sha512-HPtaa38cPgWvaCFmRNhlc6NG7pv6NUHqjPgVAkWGoB9mQMwYB27/K0CvOM5Czy+qpT3e8XJ6Q4aPAnzpNpzNaw==
+
 fastest-stable-stringify@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/fastest-stable-stringify/-/fastest-stable-stringify-1.0.1.tgz#9122d406d4c9d98bea644a6b6853d5874b87b028"
@@ -390,6 +405,11 @@ isobject@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/isobject/-/isobject-3.0.1.tgz#4e431e92b11a9731636aa1f9c8d1ccbcfdab78df"
   integrity sha1-TkMekrEalzFjaqH5yNHMvP2reN8=
+
+js-cookie@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/js-cookie/-/js-cookie-2.2.1.tgz#69e106dc5d5806894562902aa5baec3744e9b2b8"
+  integrity sha512-HvdH2LzI/EAZcUwA8+0nKNtWHqS+ZmijLA30RwZA0bo7ToCckjK5MkGhjED9KoRcXO6BaGI3I9UIzSA1FKFPOQ==
 
 js-tokens@^4.0.0:
   version "4.0.0"
@@ -586,25 +606,23 @@ pump@^3.0.0:
     end-of-stream "^1.1.0"
     once "^1.3.1"
 
-react-fast-compare@^2.0.4:
-  version "2.0.4"
-  resolved "https://registry.yarnpkg.com/react-fast-compare/-/react-fast-compare-2.0.4.tgz#e84b4d455b0fec113e0402c329352715196f81f9"
-  integrity sha512-suNP+J1VU1MWFKcyt7RtjiSWUjvidmQSlqu+eHslq+342xCbGTYmC0mEhPCOHxlW0CywylOC1u2DFAT+bv4dBw==
-
 react-lazyload@~2.6.5:
   version "2.6.5"
   resolved "https://registry.yarnpkg.com/react-lazyload/-/react-lazyload-2.6.5.tgz#7a5ac001f0f8aeddc10c30e4ce318c10f13aa723"
   integrity sha512-C/juO9l7dGS7jEARBLjM3oG7F1lL5bqajz/55sk3GFc0Ippd9vnSkdRxdiaE6gf5si3YxIow8dSJ+YuB2D/3vg==
 
-react-use@~13.12.2:
-  version "13.12.2"
-  resolved "https://registry.yarnpkg.com/react-use/-/react-use-13.12.2.tgz#89343a7769ed4b84f102bb371146a13ba2caae07"
-  integrity sha512-+I5kYjfsU7jel64wYa0nC7w/evhjL9fzmhEwOInB3HtrMt4Wt3jr6UYSVJExUTWEBUKSbmhyFAsR6jHvVj3vUw==
+react-use@~13.26.3:
+  version "13.26.3"
+  resolved "https://registry.yarnpkg.com/react-use/-/react-use-13.26.3.tgz#d278bb0f8c995c3684a15de2026fbb51bd04df02"
+  integrity sha512-81I+p1F7LFxdkGM3qiLjF9NUi2mTupvaiN76IAWL5JMY7BHTGSk6PFdzByqJrxnTJ/RBrbIVttmqvYKHOz/9Tw==
   dependencies:
-    "@xobotyi/scrollbar-width" "1.5.0"
+    "@types/js-cookie" "2.2.5"
+    "@xobotyi/scrollbar-width" "1.9.3"
     copy-to-clipboard "^3.2.0"
+    fast-deep-equal "^3.1.1"
+    fast-shallow-equal "^1.0.0"
+    js-cookie "^2.2.1"
     nano-css "^5.2.1"
-    react-fast-compare "^2.0.4"
     resize-observer-polyfill "^1.5.1"
     screenfull "^5.0.0"
     set-harmonic-interval "^1.0.1"
