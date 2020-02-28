@@ -26,11 +26,6 @@ const PlaceholderTinyBlur: React.FC<PlaceholderTinyBlurProps & React.HTMLAttribu
     }
   })
 
-  // Skip render if the src is missing (invalid)
-  if (src == null) {
-    return null
-  }
-
   const css = {
     placeholderImage: cxs({
       position: 'absolute',
@@ -51,8 +46,13 @@ const PlaceholderTinyBlur: React.FC<PlaceholderTinyBlurProps & React.HTMLAttribu
     }),
   }
 
-  return useMemo(
-    () => (
+  return useMemo(() => {
+    // Bail-out if the src is missing (invalid)
+    if (src == null) {
+      return null
+    }
+
+    return (
       <img
         className={clsx(css.placeholderImage, className, classes?.placeholderImage, {
           'is-loaded': isMainImageLoaded,
@@ -60,9 +60,8 @@ const PlaceholderTinyBlur: React.FC<PlaceholderTinyBlurProps & React.HTMLAttribu
         src={src}
         {...otherProps}
       />
-    ),
-    [classes, className, isMainImageLoaded, otherProps]
-  )
+    )
+  }, [src, classes, className, isMainImageLoaded, otherProps])
 }
 
 export default memo(PlaceholderTinyBlur)
