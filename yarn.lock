@@ -615,9 +615,9 @@ pump@^3.0.0:
     once "^1.3.1"
 
 react-lazyload@~2.6.5:
-  version "2.6.6"
-  resolved "https://registry.yarnpkg.com/react-lazyload/-/react-lazyload-2.6.6.tgz#3e1b0122b7b505cef88984b4ef5428b28dea1be9"
-  integrity sha512-waNTEToArDTMOnSWsZMYZID6+CT2xz+Hs/e4XpyAtESYBQs2L6moKYbcA4BbI6l5/ZueQQrLB+OhINL7SHmAOw==
+  version "2.6.7"
+  resolved "https://registry.yarnpkg.com/react-lazyload/-/react-lazyload-2.6.7.tgz#9f5df01858ca11780ecf6be39ed9b17d845e7349"
+  integrity sha512-IauJMTOuO73egkBQ/brm0uVMMyxo/2LWCnnzjh7FlvxRMy4P1D5ZjZX9UBMCKRJUqJD441uT+n0hEXlfcjcm8g==
 
 react-use@~14.0.0:
   version "14.0.0"
