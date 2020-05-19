@@ -18,8 +18,8 @@ import { generateCloudimageUrl } from '../../utils/cloudimageUtils'
 import { ImgBlurhashProps } from './types'
 import { ImgSizeTypeProps } from '../../types/imgComponents'
 
-const ImgBlurhash: React.FC<ImgBlurhashProps & ImgSizeTypeProps & React.HTMLAttributes<HTMLDivElement>> = (props) => {
-  const { hash, src, type, size, ratio, lazyLoad, lazyLoadOptions, classes, className, ...otherProps } = props
+const ImgBlurhash: React.FC<ImgBlurhashProps & ImgSizeTypeProps> = (props) => {
+  const { hash, type, size, ratio, lazyLoad, lazyLoadOptions, classes, className } = props
 
   const reactCloudimageContext = useContext(ReactCloudimageContext)
   const [isImageLoaded, setImageLoaded] = useState(false)
@@ -31,23 +31,22 @@ const ImgBlurhash: React.FC<ImgBlurhashProps & ImgSizeTypeProps & React.HTMLAttr
     return (
       // @ts-ignore
       <Wrapper
+        key="WRAPPER"
         className={clsx(className, classes?.wrapper)}
         type={type}
         size={size}
         ratio={ratio}
         onSizeUpdate={setComponentSize}
-        {...otherProps}
-        key="WRAPPER"
       >
         <LazyLoad once {...generateLazyLoadProps()}>
           <PlaceholderBlurhash
+            key="PLACEHOLDER"
             hash={hash}
             isMainImageLoaded={isImageLoaded}
             className={clsx(classes?.placeholder)}
-            key="PLACEHOLDER"
           />
-          <ImageLoader src={cloudimageUrl} onImageLoad={handleImageLoad} key="IMAGE_LOADER" />
-          <Img src={cloudimageUrl} className={clsx(classes?.image)} key="IMAGE" />
+          <ImageLoader key="IMAGE_LOADER" src={cloudimageUrl} onImageLoad={handleImageLoad} />
+          <Img key="IMAGE" src={cloudimageUrl} className={clsx(classes?.image)} />
         </LazyLoad>
       </Wrapper>
     )
@@ -55,22 +54,21 @@ const ImgBlurhash: React.FC<ImgBlurhashProps & ImgSizeTypeProps & React.HTMLAttr
     return (
       // @ts-ignore
       <Wrapper
+        key="WRAPPER"
         className={clsx(className, classes?.wrapper)}
         type={type}
         size={size}
         ratio={ratio}
         onSizeUpdate={setComponentSize}
-        {...otherProps}
-        key={'WRAPPER'}
       >
         <PlaceholderBlurhash
+          key="PLACEHOLDER"
           hash={hash}
           isMainImageLoaded={isImageLoaded}
           className={clsx(classes?.placeholder)}
-          key="PLACEHOLDER"
         />
-        <ImageLoader src={cloudimageUrl} onImageLoad={handleImageLoad} key="IMAGE_LOADER" />
-        <Img src={cloudimageUrl} className={clsx(classes?.image)} key="IMAGE" />
+        <ImageLoader key="IMAGE_LOADER" src={cloudimageUrl} onImageLoad={handleImageLoad} />
+        <Img key="IMAGE" src={cloudimageUrl} className={clsx(classes?.image)} />
       </Wrapper>
     )
   }

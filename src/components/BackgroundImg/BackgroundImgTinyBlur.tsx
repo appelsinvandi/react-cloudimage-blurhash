@@ -19,10 +19,8 @@ import { generateCloudimageUrl } from '../../utils/cloudimageUtils'
 import { BackgroundImgTinyBlurProps } from './types'
 import { ImgSizeTypeProps } from '../../types/imgComponents'
 
-const BackgroundImgTinyBlur: React.FC<BackgroundImgTinyBlurProps &
-  ImgSizeTypeProps &
-  React.HTMLAttributes<HTMLDivElement>> = (props) => {
-  const { src, type, size, ratio, lazyLoad, lazyLoadOptions, classes, className, children, ...otherProps } = props
+const BackgroundImgTinyBlur: React.FC<BackgroundImgTinyBlurProps & ImgSizeTypeProps> = (props) => {
+  const { type, size, ratio, lazyLoad, lazyLoadOptions, classes, id, className, children } = props
 
   const reactCloudimageContext = useContext(ReactCloudimageContext)
   const [isImageLoaded, setImageLoaded] = useState(false)
@@ -34,24 +32,24 @@ const BackgroundImgTinyBlur: React.FC<BackgroundImgTinyBlurProps &
     return (
       // @ts-ignore
       <Wrapper
+        key="WRAPPER"
+        id={id}
         className={clsx(className, classes?.wrapper)}
         type={type}
         size={size}
         ratio={ratio}
         onSizeUpdate={setComponentSize}
-        {...otherProps}
-        key="WRAPPER"
       >
         <LazyLoad once {...generateLazyLoadProps()}>
           <PlaceholderTinyBlur
-            src={cloudimageUrl}
+            key="PLACEHOLDER"
+            cloudimageUrl={cloudimageUrl!}
             isMainImageLoaded={isImageLoaded}
             className={clsx(classes?.placeholder)}
-            key="PLACEHOLDER"
           />
-          <ImageLoader src={cloudimageUrl} onImageLoad={handleImageLoad} key="IMAGE_LOADER" />
-          <BackgroundImg src={cloudimageUrl} className={clsx(classes?.image)} key="IMAGE" />
-          <BackgroundContent className={clsx(classes?.content)} key="CONTENT">
+          <ImageLoader key="IMAGE_LOADER" src={cloudimageUrl} onImageLoad={handleImageLoad} />
+          <BackgroundImg key="IMAGE" src={cloudimageUrl} className={clsx(classes?.image)} />
+          <BackgroundContent key="CONTENT" className={clsx(classes?.content)}>
             {children}
           </BackgroundContent>
         </LazyLoad>
@@ -61,23 +59,23 @@ const BackgroundImgTinyBlur: React.FC<BackgroundImgTinyBlurProps &
     return (
       // @ts-ignore
       <Wrapper
+        key="WRAPPER"
+        id={id}
         className={clsx(className, classes?.wrapper)}
         type={type}
         size={size}
         ratio={ratio}
         onSizeUpdate={setComponentSize}
-        {...otherProps}
-        key={'WRAPPER'}
       >
         <PlaceholderTinyBlur
-          src={cloudimageUrl}
+          key="PLACEHOLDER"
+          cloudimageUrl={cloudimageUrl!}
           isMainImageLoaded={isImageLoaded}
           className={clsx(classes?.placeholder)}
-          key="PLACEHOLDER"
         />
-        <ImageLoader src={cloudimageUrl} onImageLoad={handleImageLoad} key="IMAGE_LOADER" />
-        <BackgroundImg src={cloudimageUrl} className={clsx(classes?.image)} key="IMAGE" />
-        <BackgroundContent className={clsx(classes?.content)} key="CONTENT">
+        <ImageLoader key="IMAGE_LOADER" src={cloudimageUrl} onImageLoad={handleImageLoad} />
+        <BackgroundImg key="IMAGE" src={cloudimageUrl} className={clsx(classes?.image)} />
+        <BackgroundContent key="CONTENT" className={clsx(classes?.content)}>
           {children}
         </BackgroundContent>
       </Wrapper>

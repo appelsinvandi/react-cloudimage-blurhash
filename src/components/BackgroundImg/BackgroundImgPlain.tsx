@@ -17,10 +17,8 @@ import { generateCloudimageUrl } from '../../utils/cloudimageUtils'
 import { BackgroundImgPlainProps } from './types'
 import { ImgSizeTypeProps } from '../../types/imgComponents'
 
-const BackgroundImgPlain: React.FC<BackgroundImgPlainProps &
-  ImgSizeTypeProps &
-  React.HTMLAttributes<HTMLDivElement>> = (props) => {
-  const { src, type, size, ratio, lazyLoad, lazyLoadOptions, classes, className, children, ...otherProps } = props
+const BackgroundImgPlain: React.FC<BackgroundImgPlainProps & ImgSizeTypeProps> = (props) => {
+  const { type, size, ratio, lazyLoad, lazyLoadOptions, classes, id, className, children } = props
 
   const reactCloudimageContext = useContext(ReactCloudimageContext)
   const [componentSize, setComponentSize] = useState({ width: 0, height: 0 })
@@ -31,17 +29,17 @@ const BackgroundImgPlain: React.FC<BackgroundImgPlainProps &
     return (
       // @ts-ignore
       <Wrapper
+        key="WRAPPER"
+        id={id}
         className={clsx(className, classes?.wrapper)}
         type={type}
         size={size}
         ratio={ratio}
         onSizeUpdate={setComponentSize}
-        {...otherProps}
-        key="WRAPPER"
       >
         <LazyLoad once {...generateLazyLoadProps()}>
-          <BackgroundImg src={cloudimageUrl} className={clsx(classes?.image)} key="IMAGE" />
-          <BackgroundContent className={clsx(classes?.content)} key="CONTENT">
+          <BackgroundImg key="IMAGE" src={cloudimageUrl} className={clsx(classes?.image)} />
+          <BackgroundContent key="CONTENT" className={clsx(classes?.content)}>
             {children}
           </BackgroundContent>
         </LazyLoad>
@@ -51,16 +49,16 @@ const BackgroundImgPlain: React.FC<BackgroundImgPlainProps &
     return (
       // @ts-ignore
       <Wrapper
+        key="WRAPPER"
+        id={id}
         className={clsx(className, classes?.wrapper)}
         type={type}
         size={size}
         ratio={ratio}
         onSizeUpdate={setComponentSize}
-        {...otherProps}
-        key={'WRAPPER'}
       >
-        <BackgroundImg src={cloudimageUrl} className={clsx(classes?.image)} key="IMAGE" />
-        <BackgroundContent className={clsx(classes?.content)} key="CONTENT">
+        <BackgroundImg key="IMAGE" src={cloudimageUrl} className={clsx(classes?.image)} />
+        <BackgroundContent key="CONTENT" className={clsx(classes?.content)}>
           {children}
         </BackgroundContent>
       </Wrapper>

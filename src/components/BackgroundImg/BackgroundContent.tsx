@@ -7,12 +7,7 @@ import clsx from 'clsx'
 // Types
 import { BackgroundContentProps } from './types'
 
-const BackgroundContent: React.FC<BackgroundContentProps & React.HTMLAttributes<HTMLDivElement>> = ({
-  classes,
-  className,
-  children,
-  ...otherProps
-}) => {
+const BackgroundContent: React.FC<BackgroundContentProps> = ({ classes, className, children }) => {
   const css = {
     content: cxs({
       position: 'absolute',
@@ -26,11 +21,7 @@ const BackgroundContent: React.FC<BackgroundContentProps & React.HTMLAttributes<
     }),
   }
 
-  return (
-    <div className={clsx(css.content, className, classes?.contentElement)} {...otherProps}>
-      {children}
-    </div>
-  )
+  return <div className={clsx(css.content, className, classes?.contentElement)}>{children}</div>
 }
 
 export default BackgroundContent

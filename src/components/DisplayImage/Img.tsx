@@ -7,8 +7,8 @@ import clsx from 'clsx'
 // Types
 import { ImgProps } from './types'
 
-const Img: React.FC<ImgProps & React.HTMLAttributes<HTMLImageElement>> = (props) => {
-  const { src, classes, className, ...otherProps } = props
+const Img: React.FC<ImgProps> = (props) => {
+  const { src, classes, className } = props
 
   const css = {
     image: cxs({
@@ -23,7 +23,7 @@ const Img: React.FC<ImgProps & React.HTMLAttributes<HTMLImageElement>> = (props)
     }),
   }
 
-  return <img src={src} className={clsx(css.image, className, classes?.imageElement)} {...otherProps} />
+  return <img src={src} className={clsx(css.image, className, classes?.imageElement)} />
 }
 
 export default memo(Img)

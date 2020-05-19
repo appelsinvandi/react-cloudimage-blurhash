@@ -29,7 +29,8 @@
   "scripts": {
     "build:cjs": "tsc -p ./tsconfig.json",
     "build:es": "tsc -p ./tsconfig.json -m esNext --outDir esm",
-    "build": "yarn build:cjs && yarn build:es",
+    "build": "yarn cleanup && yarn build:cjs && yarn build:es",
+    "cleanup": "rimraf lib/**/* && rimraf esm/**/*",
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
@@ -37,6 +38,7 @@
     "blurhash-wasm": "~0.2.0",
     "clsx": "~1.1.0",
     "cxs": "6.2.0",
+    "lodash.memoize": "4.1.2",
     "react-lazyload": "~2.6.5",
     "react-use": "~15.1.0"
   },
@@ -45,13 +47,16 @@
     "react-dom": "^16.9.0"
   },
   "devDependencies": {
+    "@types/lodash.memoize": "4.1.2",
     "@types/prettier": "2.0.0",
     "@types/react": "16.9.35",
     "@types/react-dom": "16.9.8",
     "@types/react-lazyload": "2.6.0",
+    "@types/rimraf": "3.0.0",
     "husky": "4.2.5",
     "prettier": "2.0.5",
     "pretty-quick": "2.0.1",
+    "rimraf": "3.0.2",
     "tslib": "2.0.0",
     "typescript": "3.9.2"
   }

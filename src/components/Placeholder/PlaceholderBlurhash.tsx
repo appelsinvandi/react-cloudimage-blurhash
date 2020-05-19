@@ -1,34 +1,34 @@
-import React, { useEffect, useRef, useMemo, useContext } from 'react'
+import React, { useRef, useMemo, useContext, useState, useEffect } from 'react'
 import cxs from 'cxs'
 
 // Context
 import { ReactCloudimageContext } from '../ReactCloudimageProvider'
 
 // Utils
-import clsx from 'clsx'
 import { decode } from 'blurhash'
+import clsx from 'clsx'
 
 // Types
 import { PlaceholderBlurhashProps } from './types'
 
-const PlaceholderBlurhash: React.FC<PlaceholderBlurhashProps & React.HTMLAttributes<HTMLCanvasElement>> = (props) => {
-  const { hash, isMainImageLoaded, classes, className, ...otherProps } = props
+const PlaceholderBlurhash: React.FC<PlaceholderBlurhashProps> = (props) => {
+  const { hash, isMainImageLoaded, classes, className } = props
   const reactCloudimageBlurhashContext = useContext(ReactCloudimageContext)
 
   const blurhashCanvas = useRef<HTMLCanvasElement>(null)
+  const [blurhashPixels, setBlurhashPixels] = useState<Uint8ClampedArray | null>(null)
 
   useEffect(() => {
-    if (blurhashCanvas) {
-      const pixels = decode(hash, 32, 32)
-
-      const ctx = blurhashCanvas.current?.getContext('2d')
-      if (ctx) {
-        const imageData = ctx.createImageData(32, 32)
-        imageData.data.set(pixels!)
-        ctx.putImageData(imageData, 0, 0)
-      }
+    setBlurhashPixels(decode(hash, 32, 32))
+  }, [hash])
+  useEffect(() => {
+    const ctx = blurhashCanvas.current?.getContext('2d')
+    if (ctx != null && blurhashPixels != null) {
+      const imageData = ctx.createImageData(32, 32)
+      imageData.data.set(blurhashPixels!)
+      ctx.putImageData(imageData, 0, 0)
     }
-  }, [hash, blurhashCanvas])
+  }, [blurhashPixels, blurhashCanvas.current])
 
   const css = {
     placeholderImage: cxs({
@@ -56,12 +56,11 @@ const PlaceholderBlurhash: React.FC<PlaceholderBlurhashProps & React.HTMLAttribu
         className={clsx(css.placeholderImage, className, classes?.placeholderImage, {
           'is-loaded': isMainImageLoaded,
         })}
-        {...otherProps}
         height="32"
         width="32"
       />
     ),
-    [classes, className, isMainImageLoaded, otherProps]
+    [classes, className, isMainImageLoaded]
   )
 }
 

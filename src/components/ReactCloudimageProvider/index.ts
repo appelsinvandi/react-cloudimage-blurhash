@@ -1,3 +1,2 @@
-import ReactCloudimageProvider, { ReactCloudimageContext } from './ReactCloudImageProvider'
-
-export { ReactCloudimageProvider, ReactCloudimageContext }
+export { default as ReactCloudimageProvider } from './ReactCloudImageProvider'
+export { ReactCloudimageContext } from './Context'

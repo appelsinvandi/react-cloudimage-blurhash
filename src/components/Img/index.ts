@@ -1,6 +1,4 @@
-import ImgPlain from './ImgPlain'
-import ImgBlurhash from './ImgBlurhash'
-import ImgBlurhashWasm from './ImgBlurhashWasm'
-import ImgTinyBlur from './ImgTinyBlur'
-
-export { ImgPlain, ImgBlurhash, ImgBlurhashWasm, ImgTinyBlur }
+export { default as ImgPlain } from './ImgPlain'
+export { default as ImgBlurhash } from './ImgBlurhash'
+export { default as ImgBlurhashWasm } from './ImgBlurhashWasm'
+export { default as ImgTinyBlur } from './ImgTinyBlur'

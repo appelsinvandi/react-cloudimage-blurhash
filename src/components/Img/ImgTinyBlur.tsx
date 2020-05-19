@@ -18,8 +18,8 @@ import { generateCloudimageUrl } from '../../utils/cloudimageUtils'
 import { ImgTinyBlurProps } from './types'
 import { ImgSizeTypeProps } from '../../types/imgComponents'
 
-const ImgTinyBlur: React.FC<ImgTinyBlurProps & ImgSizeTypeProps & React.HTMLAttributes<HTMLDivElement>> = (props) => {
-  const { src, type, size, ratio, lazyLoad, lazyLoadOptions, classes, className, children, ...otherProps } = props
+const ImgTinyBlur: React.FC<ImgTinyBlurProps & ImgSizeTypeProps> = (props) => {
+  const { type, size, ratio, lazyLoad, lazyLoadOptions, classes, className } = props
 
   const reactCloudimageContext = useContext(ReactCloudimageContext)
   const [isImageLoaded, setImageLoaded] = useState(false)
@@ -31,23 +31,22 @@ const ImgTinyBlur: React.FC<ImgTinyBlurProps & ImgSizeTypeProps & React.HTMLAttr
     return (
       // @ts-ignore
       <Wrapper
+        key="WRAPPER"
         className={clsx(className, classes?.wrapper)}
         type={type}
         size={size}
         ratio={ratio}
         onSizeUpdate={setComponentSize}
-        {...otherProps}
-        key="WRAPPER"
       >
         <LazyLoad once {...generateLazyLoadProps()}>
           <PlaceholderTinyBlur
-            src={src}
+            key="PLACEHOLDER"
+            cloudimageUrl={cloudimageUrl!}
             isMainImageLoaded={isImageLoaded}
             className={clsx(classes?.placeholder)}
-            key="PLACEHOLDER"
           />
-          <ImageLoader src={cloudimageUrl} onImageLoad={handleImageLoad} key="IMAGE_LOADER" />
-          <Img src={cloudimageUrl} className={clsx(classes?.image)} key="IMAGE" />
+          <ImageLoader key="IMAGE_LOADER" src={cloudimageUrl} onImageLoad={handleImageLoad} />
+          <Img key="IMAGE" src={cloudimageUrl} className={clsx(classes?.image)} />
         </LazyLoad>
       </Wrapper>
     )
@@ -55,22 +54,21 @@ const ImgTinyBlur: React.FC<ImgTinyBlurProps & ImgSizeTypeProps & React.HTMLAttr
     return (
       // @ts-ignore
       <Wrapper
+        key="WRAPPER"
         className={clsx(className, classes?.wrapper)}
         type={type}
         size={size}
         ratio={ratio}
         onSizeUpdate={setComponentSize}
-        {...otherProps}
-        key={'WRAPPER'}
       >
         <PlaceholderTinyBlur
-          src={src}
+          key="PLACEHOLDER"
+          cloudimageUrl={cloudimageUrl!}
           isMainImageLoaded={isImageLoaded}
           className={clsx(classes?.placeholder)}
-          key="PLACEHOLDER"
         />
-        <ImageLoader src={cloudimageUrl} onImageLoad={handleImageLoad} key="IMAGE_LOADER" />
-        <Img src={cloudimageUrl} className={clsx(classes?.image)} key="IMAGE" />
+        <ImageLoader key="IMAGE_LOADER" src={cloudimageUrl} onImageLoad={handleImageLoad} />
+        <Img key="IMAGE" src={cloudimageUrl} className={clsx(classes?.image)} />
       </Wrapper>
     )
   }

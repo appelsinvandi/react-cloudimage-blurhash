@@ -1,6 +1,4 @@
-import BackgroundImgPlain from './BackgroundImgPlain'
-import BackgroundImgBlurhash from './BackgroundImgBlurhash'
-import BackgroundImgBlurhashWasm from './BackgroundImgBlurhashWasm'
-import BackgroundImgTinyBlur from './BackgroundImgTinyBlur'
-
-export { BackgroundImgPlain, BackgroundImgBlurhash, BackgroundImgBlurhashWasm, BackgroundImgTinyBlur }
+export { default as BackgroundImgPlain } from './BackgroundImgPlain'
+export { default as BackgroundImgBlurhash } from './BackgroundImgBlurhash'
+export { default as BackgroundImgBlurhashWasm } from './BackgroundImgBlurhashWasm'
+export { default as BackgroundImgTinyBlur } from './BackgroundImgTinyBlur'
