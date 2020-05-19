@@ -26,7 +26,11 @@ const Wrapper: React.FC<WrapperProps & ImgSizeTypeProps & React.HTMLAttributes<H
   }
 
   return (
-    <div ref={wrapperElementRef} className={clsx(css.wrapper, className, classes?.wrapper)} {...otherProps}>
+    <div
+      ref={(ref) => wrapperElementRef(ref!)}
+      className={clsx(css.wrapper, className, classes?.wrapper)}
+      {...otherProps}
+    >
       {children}
     </div>
   )
