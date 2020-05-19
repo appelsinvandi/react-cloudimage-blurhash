@@ -12,6 +12,8 @@ export interface BackgroundImgPlainProps extends ImgBaseProps {
   type: ImageSizingStrategy
   ratio?: number
   size?: WidthAndHeight | number
+  id?: string
+  className?: string
 }
 
 export interface BackgroundImgBlurhashProps extends ImgBaseProps {
@@ -22,6 +24,8 @@ export interface BackgroundImgBlurhashProps extends ImgBaseProps {
   type: ImageSizingStrategy
   ratio?: number
   size?: WidthAndHeight | number
+  id?: string
+  className?: string
 }
 
 export interface BackgroundImgTinyBlurProps extends ImgBaseProps {
@@ -31,10 +35,14 @@ export interface BackgroundImgTinyBlurProps extends ImgBaseProps {
   type: ImageSizingStrategy
   ratio?: number
   size?: WidthAndHeight | number
+  id?: string
+  className?: string
 }
 
 export interface BackgroundContentProps {
   classes?: BackgroundContentClasses
+  id?: string
+  className?: string
 }
 
 export interface BackgroundImgPlainClasses {

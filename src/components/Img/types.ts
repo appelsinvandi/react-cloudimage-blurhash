@@ -12,6 +12,7 @@ export interface ImgPlainProps extends ImgBaseProps {
   type: ImageSizingStrategy
   ratio?: number
   size?: WidthAndHeight | number
+  className?: string
 }
 
 export interface ImgBlurhashProps extends ImgBaseProps {
@@ -22,6 +23,7 @@ export interface ImgBlurhashProps extends ImgBaseProps {
   type: ImageSizingStrategy
   ratio?: number
   size?: WidthAndHeight | number
+  className?: string
 }
 
 export interface ImgTinyBlurProps extends ImgBaseProps {
@@ -31,6 +33,7 @@ export interface ImgTinyBlurProps extends ImgBaseProps {
   type: ImageSizingStrategy
   ratio?: number
   size?: WidthAndHeight | number
+  className?: string
 }
 
 export interface ImgPlainClasses {

@@ -1,17 +1,6 @@
-import * as React from 'react'
+import React, { useMemo } from 'react'
 import { ReactCloudimageContextValue } from './types'
-
-export const ReactCloudimageContext = React.createContext<ReactCloudimageContextValue>({
-  cloudimageConfig: {
-    token: 'demo',
-  },
-  theme: {
-    placeholderBackgroundColor: 'lightgray',
-  },
-  lazyLoadDefaults: {
-    enabled: true,
-  },
-})
+import { ReactCloudimageContext, defaultContext } from './Context'
 
 const ReactCloudimageProvider: React.FunctionComponent<ReactCloudimageContextValue> = ({
   cloudimageConfig,
@@ -19,11 +8,10 @@ const ReactCloudimageProvider: React.FunctionComponent<ReactCloudimageContextVal
   lazyLoadDefaults,
   children,
 }) => {
-  return (
-    <ReactCloudimageContext.Provider value={{ cloudimageConfig, theme, lazyLoadDefaults }}>
-      {children}
-    </ReactCloudimageContext.Provider>
-  )
+  const comparableValue = JSON.stringify({ ...defaultContext, cloudimageConfig, theme, lazyLoadDefaults })
+  const value = useMemo(() => ({ ...defaultContext, cloudimageConfig, theme, lazyLoadDefaults }), [comparableValue])
+
+  return <ReactCloudimageContext.Provider value={value}>{children}</ReactCloudimageContext.Provider>
 }
 
 export default ReactCloudimageProvider

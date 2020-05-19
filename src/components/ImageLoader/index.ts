@@ -1,3 +1,1 @@
-import ImageLoader from './ImageLoader'
-
-export { ImageLoader }
+export { default as ImageLoader } from './ImageLoader'

@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
+    "target": "es6",
+    "module": "CommonJS",
     "moduleResolution": "node",
     "jsx": "react",
     "declaration": true,
@@ -17,7 +17,7 @@
     "noImplicitAny": false,
     "noFallthroughCasesInSwitch": true,
     "outDir": "lib",
-    "lib": ["es2018", "dom"],
+    "lib": ["dom"],
     "importHelpers": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true

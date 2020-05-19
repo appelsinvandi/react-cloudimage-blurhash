@@ -12,8 +12,8 @@ import clsx from 'clsx'
 import { WrapperProps } from './types'
 import { ImgSizeTypeProps } from '../../types/imgComponents'
 
-const Wrapper: React.FC<WrapperProps & ImgSizeTypeProps & React.HTMLAttributes<HTMLDivElement>> = (props) => {
-  const { classes, type, size, ratio, onSizeUpdate, children, className, ...otherProps } = props
+const Wrapper: React.FC<WrapperProps & ImgSizeTypeProps> = (props) => {
+  const { type, size, ratio, onSizeUpdate, classes, id, className, children } = props
 
   const wrapperElementRef = useSizeDebounce((size) => {
     if (onSizeUpdate) {
@@ -26,11 +26,7 @@ const Wrapper: React.FC<WrapperProps & ImgSizeTypeProps & React.HTMLAttributes<H
   }
 
   return (
-    <div
-      ref={(ref) => wrapperElementRef(ref!)}
-      className={clsx(css.wrapper, className, classes?.wrapper)}
-      {...otherProps}
-    >
+    <div id={id} className={clsx(css.wrapper, className, classes?.wrapper)} ref={(ref) => wrapperElementRef(ref!)}>
       {children}
     </div>
   )

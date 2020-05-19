@@ -7,8 +7,8 @@ import clsx from 'clsx'
 // Types
 import { BackgroundImgProps } from './types'
 
-const BackgroundImg: React.FC<BackgroundImgProps & React.HTMLAttributes<HTMLDivElement>> = (props) => {
-  const { src, classes, children, className, ...otherProps } = props
+const BackgroundImg: React.FC<BackgroundImgProps> = (props) => {
+  const { src, classes, children, className } = props
 
   const css = {
     image: cxs({
@@ -27,11 +27,7 @@ const BackgroundImg: React.FC<BackgroundImgProps & React.HTMLAttributes<HTMLDivE
     }),
   }
 
-  return (
-    <div className={clsx(css.image, className, classes?.imageElement)} {...otherProps}>
-      {children}
-    </div>
-  )
+  return <div className={clsx(css.image, className, classes?.imageElement)}>{children}</div>
 }
 
 export default memo(BackgroundImg)

@@ -19,10 +19,8 @@ import { generateCloudimageUrl } from '../../utils/cloudimageUtils'
 import { BackgroundImgBlurhashProps } from './types'
 import { ImgSizeTypeProps } from '../../types/imgComponents'
 
-const BackgroundImgBlurhash: React.FC<BackgroundImgBlurhashProps &
-  ImgSizeTypeProps &
-  React.HTMLAttributes<HTMLDivElement>> = (props) => {
-  const { hash, src, type, size, ratio, lazyLoad, lazyLoadOptions, classes, className, children, ...otherProps } = props
+const BackgroundImgBlurhash: React.FC<BackgroundImgBlurhashProps & ImgSizeTypeProps> = (props) => {
+  const { hash, type, size, ratio, lazyLoad, lazyLoadOptions, classes, id, className, children } = props
 
   const reactCloudimageContext = useContext(ReactCloudimageContext)
   const [isImageLoaded, setImageLoaded] = useState(false)
@@ -34,24 +32,24 @@ const BackgroundImgBlurhash: React.FC<BackgroundImgBlurhashProps &
     return (
       // @ts-ignore
       <Wrapper
+        key="WRAPPER"
+        id={id}
         className={clsx(className, classes?.wrapper)}
         type={type}
         size={size}
         ratio={ratio}
         onSizeUpdate={setComponentSize}
-        {...otherProps}
-        key="WRAPPER"
       >
         <LazyLoad once {...generateLazyLoadProps()}>
           <PlaceholderBlurhash
+            key="PLACEHOLDER"
             hash={hash}
             isMainImageLoaded={isImageLoaded}
             className={clsx(classes?.placeholder)}
-            key="PLACEHOLDER"
           />
-          <ImageLoader src={cloudimageUrl} onImageLoad={handleImageLoad} key="IMAGE_LOADER" />
-          <BackgroundImg src={cloudimageUrl} className={clsx(classes?.image)} key="IMAGE" />
-          <BackgroundContent className={clsx(classes?.content)} key="CONTENT">
+          <ImageLoader key="IMAGE_LOADER" src={cloudimageUrl} onImageLoad={handleImageLoad} />
+          <BackgroundImg key="IMAGE" src={cloudimageUrl} className={clsx(classes?.image)} />
+          <BackgroundContent key="CONTENT" className={clsx(classes?.content)}>
             {children}
           </BackgroundContent>
         </LazyLoad>
@@ -61,23 +59,23 @@ const BackgroundImgBlurhash: React.FC<BackgroundImgBlurhashProps &
     return (
       // @ts-ignore
       <Wrapper
+        key="WRAPPER"
+        id={id}
         className={clsx(className, classes?.wrapper)}
         type={type}
         size={size}
         ratio={ratio}
         onSizeUpdate={setComponentSize}
-        {...otherProps}
-        key={'WRAPPER'}
       >
         <PlaceholderBlurhash
+          key="PLACEHOLDER"
           hash={hash}
           isMainImageLoaded={isImageLoaded}
           className={clsx(classes?.placeholder)}
-          key="PLACEHOLDER"
         />
-        <ImageLoader src={cloudimageUrl} onImageLoad={handleImageLoad} key="IMAGE_LOADER" />
-        <BackgroundImg src={cloudimageUrl} className={clsx(classes?.image)} key="IMAGE" />
-        <BackgroundContent className={clsx(classes?.content)} key="CONTENT">
+        <ImageLoader key="IMAGE_LOADER" src={cloudimageUrl} onImageLoad={handleImageLoad} />
+        <BackgroundImg key="IMAGE" src={cloudimageUrl} className={clsx(classes?.image)} />
+        <BackgroundContent key="CONTENT" className={clsx(classes?.content)}>
           {children}
         </BackgroundContent>
       </Wrapper>

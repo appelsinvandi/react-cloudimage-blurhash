@@ -16,8 +16,8 @@ import { generateCloudimageUrl } from '../../utils/cloudimageUtils'
 import { ImgPlainProps } from './types'
 import { ImgSizeTypeProps } from '../../types/imgComponents'
 
-const ImgPlain: React.FC<ImgPlainProps & ImgSizeTypeProps & React.HTMLAttributes<HTMLDivElement>> = (props) => {
-  const { src, type, size, ratio, lazyLoad, lazyLoadOptions, classes, className, children, ...otherProps } = props
+const ImgPlain: React.FC<ImgPlainProps & ImgSizeTypeProps> = (props) => {
+  const { type, size, ratio, lazyLoad, lazyLoadOptions, classes, className } = props
 
   const reactCloudimageContext = useContext(ReactCloudimageContext)
   const [componentSize, setComponentSize] = useState({ width: 0, height: 0 })
@@ -28,16 +28,15 @@ const ImgPlain: React.FC<ImgPlainProps & ImgSizeTypeProps & React.HTMLAttributes
     return (
       // @ts-ignore
       <Wrapper
+        key="WRAPPER"
         className={clsx(className, classes?.wrapper)}
         type={type}
         size={size}
         ratio={ratio}
         onSizeUpdate={setComponentSize}
-        {...otherProps}
-        key="WRAPPER"
       >
         <LazyLoad once {...generateLazyLoadProps()}>
-          <Img src={cloudimageUrl} className={clsx(classes?.image)} key="IMAGE" />
+          <Img key="IMAGE" src={cloudimageUrl} className={clsx(classes?.image)} />
         </LazyLoad>
       </Wrapper>
     )
@@ -45,15 +44,14 @@ const ImgPlain: React.FC<ImgPlainProps & ImgSizeTypeProps & React.HTMLAttributes
     return (
       // @ts-ignore
       <Wrapper
+        key="WRAPPER"
         className={clsx(className, classes?.wrapper)}
         type={type}
         size={size}
         ratio={ratio}
         onSizeUpdate={setComponentSize}
-        {...otherProps}
-        key={'WRAPPER'}
       >
-        <Img src={cloudimageUrl} className={clsx(classes?.image)} key="IMAGE" />
+        <Img key="IMAGE" src={cloudimageUrl} className={clsx(classes?.image)} />
       </Wrapper>
     )
   }

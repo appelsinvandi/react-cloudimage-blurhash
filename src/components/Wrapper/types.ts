@@ -1,5 +1,5 @@
 // Constants
-import { ImageSizingStrategy } from 'constants'
+import { ImageSizingStrategy } from 'constants/propConstants'
 
 // Types
 import { WidthAndHeight } from 'types/imgComponents'
@@ -10,6 +10,8 @@ export interface WrapperProps {
   size?: WidthAndHeight | number
   ratio?: number
   onSizeUpdate?: (size: WidthAndHeight) => void
+  id?: string
+  className?: string
 }
 
 export interface WrapperClasses {

@@ -1,3 +1,1 @@
-import Wrapper from './Wrapper'
-
-export { Wrapper }
+export { default as Wrapper } from './Wrapper'

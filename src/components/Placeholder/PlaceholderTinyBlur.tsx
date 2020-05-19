@@ -10,9 +10,9 @@ import clsx from 'clsx'
 // Types
 import { PlaceholderTinyBlurProps } from './types'
 
-const PlaceholderTinyBlur: React.FC<PlaceholderTinyBlurProps & React.HTMLAttributes<HTMLImageElement>> = (props) => {
-  const { src, isMainImageLoaded, className, classes, ...otherProps } = props
-  const reactCloudimageBlurhashContext = useContext(ReactCloudimageContext)
+const PlaceholderTinyBlur: React.FC<PlaceholderTinyBlurProps> = (props) => {
+  const { cloudimageUrl, isMainImageLoaded, className, classes } = props
+  const reactCloudimageContext = useContext(ReactCloudimageContext)
 
   const componentRef = useRef<HTMLDivElement>(null)
   const [imgDimensions, setImgDimensions] = useState({ width: 0, height: 0 })
@@ -26,19 +26,26 @@ const PlaceholderTinyBlur: React.FC<PlaceholderTinyBlurProps & React.HTMLAttribu
     }
   })
 
+  const blurAmount = 4
+  let tinyCloudimageUrl: null | string = null
+  if (cloudimageUrl != null) {
+    tinyCloudimageUrl = cloudimageUrl
+      .replace(/width=(\d+)/gi, (_m, v) => `width=${Math.floor(Number(v) / blurAmount)}`)
+      .replace(/height=(\d+)/gi, (_m, v) => `height=${Math.floor(Number(v) / blurAmount)}`)
+  }
   const css = {
     placeholderImage: cxs({
       position: 'absolute',
-      top: '0',
-      right: '0',
-      bottom: '0',
-      left: '0',
+      top: `-${blurAmount}px`,
+      right: `-${blurAmount}px`,
+      bottom: `-${blurAmount}px`,
+      left: `-${blurAmount}px`,
       zIndex: 10,
-      width: '100%',
-      height: '100%',
-      filter: 'blur(10px)',
+      width: `calc(100% + ${blurAmount * 2}px)`,
+      height: `calc(100% + ${blurAmount * 2}px)`,
+      filter: `blur(${blurAmount}px)`,
       opacity: 1,
-      backgroundColor: reactCloudimageBlurhashContext.theme?.placeholderBackgroundColor ?? 'lightgrey',
+      backgroundColor: reactCloudimageContext.theme?.placeholderBackgroundColor ?? 'lightgrey',
       '.is-loaded': {
         opacity: 0,
         transition: 'opacity 0.3s ease-in-out 0s',
@@ -47,21 +54,15 @@ const PlaceholderTinyBlur: React.FC<PlaceholderTinyBlurProps & React.HTMLAttribu
   }
 
   return useMemo(() => {
-    // Bail-out if the src is missing (invalid)
-    if (src == null) {
-      return null
-    }
-
     return (
       <img
         className={clsx(css.placeholderImage, className, classes?.placeholderImage, {
           'is-loaded': isMainImageLoaded,
         })}
-        src={src}
-        {...otherProps}
+        src={tinyCloudimageUrl!}
       />
     )
-  }, [src, classes, className, isMainImageLoaded, otherProps])
+  }, [tinyCloudimageUrl, classes, className, isMainImageLoaded])
 }
 
 export default memo(PlaceholderTinyBlur)
