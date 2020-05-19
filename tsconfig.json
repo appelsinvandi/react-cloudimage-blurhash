@@ -19,7 +19,8 @@
     "outDir": "lib",
     "lib": ["es2018", "dom"],
     "importHelpers": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
   },
   "include": ["src/*"],
   "exclude": ["node_modules", "lib", "esm"]

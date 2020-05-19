@@ -2,7 +2,7 @@
 import { ImageSizingStrategy } from '../../constants'
 
 // Types
-import { ImgBaseProps, WidthAndHeight } from '../../types/ImgComponents'
+import { ImgBaseProps, WidthAndHeight } from '../../types/imgComponents'
 import { LazyLoadProps } from 'react-lazyload'
 
 export interface BackgroundImgPlainProps extends ImgBaseProps {
