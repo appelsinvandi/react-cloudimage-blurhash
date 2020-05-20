@@ -5,8 +5,8 @@ import cxs from 'cxs'
 import { ReactCloudimageContext } from '../ReactCloudimageProvider'
 
 // Utils
-import { decode } from 'blurhash-wasm'
 import clsx from 'clsx'
+const blurhashDecode = import(/* webpackChunkName: "rcb_blurhash_wasm" */ 'blurhash-wasm').then((e) => e.decode)
 
 // Types
 import { PlaceholderBlurhashWasmProps } from './types'
@@ -19,7 +19,13 @@ const PlaceholderBlurhashWasm: React.FC<PlaceholderBlurhashWasmProps> = (props) 
   const [blurhashPixels, setBlurhashPixels] = useState<Uint8Array | null>(null)
 
   useEffect(() => {
-    setBlurhashPixels(decode(hash, 32, 32)!)
+    async function decodeBlurhash() {
+      const decode = await blurhashDecode
+      const decodedBlurhash = decode(hash, 32, 32)!
+      setBlurhashPixels(decodedBlurhash)
+    }
+
+    decodeBlurhash()
   }, [hash])
   useEffect(() => {
     const ctx = blurhashCanvas.current?.getContext('2d')
