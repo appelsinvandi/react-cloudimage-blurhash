@@ -19,7 +19,7 @@ import { ImgTinyBlurProps } from './types'
 import { ImgSizeTypeProps } from '../../types/imgComponents'
 
 const ImgTinyBlur: React.FC<ImgTinyBlurProps & ImgSizeTypeProps> = (props) => {
-  const { type, size, ratio, lazyLoad, lazyLoadOptions, classes, className } = props
+  const { type, size, ratio, lazyLoad, lazyLoadOptions, classes, className, ...otherProps } = props
 
   const reactCloudimageContext = useContext(ReactCloudimageContext)
   const [isImageLoaded, setImageLoaded] = useState(false)
@@ -37,6 +37,7 @@ const ImgTinyBlur: React.FC<ImgTinyBlurProps & ImgSizeTypeProps> = (props) => {
         size={size}
         ratio={ratio}
         onSizeUpdate={setComponentSize}
+        {...otherProps}
       >
         <LazyLoad once {...generateLazyLoadProps()}>
           <PlaceholderTinyBlur
@@ -52,7 +53,6 @@ const ImgTinyBlur: React.FC<ImgTinyBlurProps & ImgSizeTypeProps> = (props) => {
     )
   } else {
     return (
-      // @ts-ignore
       <Wrapper
         key="WRAPPER"
         className={clsx(className, classes?.wrapper)}
@@ -60,6 +60,7 @@ const ImgTinyBlur: React.FC<ImgTinyBlurProps & ImgSizeTypeProps> = (props) => {
         size={size}
         ratio={ratio}
         onSizeUpdate={setComponentSize}
+        {...otherProps}
       >
         <PlaceholderTinyBlur
           key="PLACEHOLDER"

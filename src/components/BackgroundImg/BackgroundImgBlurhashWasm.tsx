@@ -20,7 +20,7 @@ import { BackgroundImgBlurhashProps } from './types'
 import { ImgSizeTypeProps } from '../../types/imgComponents'
 
 const BackgroundImgBlurhashWasm: React.FC<BackgroundImgBlurhashProps & ImgSizeTypeProps> = (props) => {
-  const { hash, type, size, ratio, lazyLoad, lazyLoadOptions, classes, id, className, children } = props
+  const { hash, type, size, ratio, lazyLoad, lazyLoadOptions, classes, id, className, children, ...otherProps } = props
 
   const reactCloudimageContext = useContext(ReactCloudimageContext)
   const [componentSize, setComponentSize] = useState({ width: 0, height: 0 })
@@ -39,6 +39,7 @@ const BackgroundImgBlurhashWasm: React.FC<BackgroundImgBlurhashProps & ImgSizeTy
         size={size}
         ratio={ratio}
         onSizeUpdate={setComponentSize}
+        {...otherProps}
       >
         <LazyLoad once {...generateLazyLoadProps()}>
           <PlaceholderBlurhashWasm
