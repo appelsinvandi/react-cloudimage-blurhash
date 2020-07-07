@@ -1,4 +1,4 @@
-import React, { useContext, useState, memo } from 'react'
+import React, { useContext, useState, memo, useEffect } from 'react'
 
 // Components
 import LazyLoad from 'react-lazyload'
@@ -19,11 +19,14 @@ import { ImgTinyBlurProps } from './types'
 import { ImgSizeTypeProps } from '../../types/imgComponents'
 
 const ImgTinyBlur: React.FC<ImgTinyBlurProps & ImgSizeTypeProps> = (props) => {
-  const { type, size, ratio, lazyLoad, lazyLoadOptions, classes, className, ...otherProps } = props
+  const { src, type, size, ratio, lazyLoad, lazyLoadOptions, classes, className, ...otherProps } = props
 
   const reactCloudimageContext = useContext(ReactCloudimageContext)
   const [isImageLoaded, setImageLoaded] = useState(false)
   const [componentSize, setComponentSize] = useState({ width: 0, height: 0 })
+
+  // Reset image load status when the src is changed
+  useEffect(() => setImageLoaded(false), [src])
 
   const cloudimageUrl = generateCloudimageUrl(reactCloudimageContext.cloudimageConfig.token, props, componentSize)
 

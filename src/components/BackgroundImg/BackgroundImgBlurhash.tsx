@@ -1,4 +1,4 @@
-import React, { useContext, useState, memo } from 'react'
+import React, { useContext, useState, memo, useEffect } from 'react'
 
 // Components
 import LazyLoad from 'react-lazyload'
@@ -20,11 +20,27 @@ import { BackgroundImgBlurhashProps } from './types'
 import { ImgSizeTypeProps } from '../../types/imgComponents'
 
 const BackgroundImgBlurhash: React.FC<BackgroundImgBlurhashProps & ImgSizeTypeProps> = (props) => {
-  const { hash, type, size, ratio, lazyLoad, lazyLoadOptions, classes, id, className, children, ...otherProps } = props
+  const {
+    src,
+    hash,
+    type,
+    size,
+    ratio,
+    lazyLoad,
+    lazyLoadOptions,
+    classes,
+    id,
+    className,
+    children,
+    ...otherProps
+  } = props
 
   const reactCloudimageContext = useContext(ReactCloudimageContext)
   const [isImageLoaded, setImageLoaded] = useState(false)
   const [componentSize, setComponentSize] = useState({ width: 0, height: 0 })
+
+  // Reset image load status when the src is changed
+  useEffect(() => setImageLoaded(false), [src])
 
   const cloudimageUrl = generateCloudimageUrl(reactCloudimageContext.cloudimageConfig.token, props, componentSize)
 
