@@ -17,7 +17,7 @@ import { ImgPlainProps } from './types'
 import { ImgSizeTypeProps } from '../../types/imgComponents'
 
 const ImgPlain: React.FC<ImgPlainProps & ImgSizeTypeProps> = (props) => {
-  const { type, size, ratio, lazyLoad, lazyLoadOptions, classes, className } = props
+  const { type, size, ratio, lazyLoad, lazyLoadOptions, classes, className, ...otherProps } = props
 
   const reactCloudimageContext = useContext(ReactCloudimageContext)
   const [componentSize, setComponentSize] = useState({ width: 0, height: 0 })
@@ -34,6 +34,7 @@ const ImgPlain: React.FC<ImgPlainProps & ImgSizeTypeProps> = (props) => {
         size={size}
         ratio={ratio}
         onSizeUpdate={setComponentSize}
+        {...otherProps}
       >
         <LazyLoad once {...generateLazyLoadProps()}>
           <Img key="IMAGE" src={cloudimageUrl} className={clsx(classes?.image)} />

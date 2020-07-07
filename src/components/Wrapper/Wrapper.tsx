@@ -13,7 +13,7 @@ import { WrapperProps } from './types'
 import { ImgSizeTypeProps } from '../../types/imgComponents'
 
 const Wrapper: React.FC<WrapperProps & ImgSizeTypeProps> = (props) => {
-  const { type, size, ratio, onSizeUpdate, classes, id, className, children } = props
+  const { type, size, ratio, onSizeUpdate, classes, id, className, children, ...otherProps } = props
 
   const wrapperElementRef = useSizeDebounce((size) => {
     if (onSizeUpdate) {
@@ -26,7 +26,12 @@ const Wrapper: React.FC<WrapperProps & ImgSizeTypeProps> = (props) => {
   }
 
   return (
-    <div id={id} className={clsx(css.wrapper, className, classes?.wrapper)} ref={(ref) => wrapperElementRef(ref!)}>
+    <div
+      id={id}
+      className={clsx(css.wrapper, className, classes?.wrapper)}
+      ref={(ref) => wrapperElementRef(ref!)}
+      {...otherProps}
+    >
       {children}
     </div>
   )
