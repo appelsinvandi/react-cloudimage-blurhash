@@ -57,6 +57,7 @@ const BackgroundImgPlain: React.FC<BackgroundImgPlainProps & ImgSizeTypeProps> =
         size={size}
         ratio={ratio}
         onSizeUpdate={setComponentSize}
+        {...otherProps}
       >
         <BackgroundImg key="IMAGE" src={cloudimageUrl} className={clsx(classes?.image)} />
         <BackgroundContent key="CONTENT" className={clsx(classes?.content)}>

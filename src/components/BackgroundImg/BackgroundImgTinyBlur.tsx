@@ -67,6 +67,7 @@ const BackgroundImgTinyBlur: React.FC<BackgroundImgTinyBlurProps & ImgSizeTypePr
         size={size}
         ratio={ratio}
         onSizeUpdate={setComponentSize}
+        {...otherProps}
       >
         <PlaceholderTinyBlur
           key="PLACEHOLDER"

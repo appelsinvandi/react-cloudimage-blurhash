@@ -67,6 +67,7 @@ const BackgroundImgBlurhashWasm: React.FC<BackgroundImgBlurhashProps & ImgSizeTy
         size={size}
         ratio={ratio}
         onSizeUpdate={setComponentSize}
+        {...otherProps}
       >
         <PlaceholderBlurhashWasm
           key="PLACEHOLDER"
