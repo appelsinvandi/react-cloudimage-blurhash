@@ -51,6 +51,7 @@ const ImgPlain: React.FC<ImgPlainProps & ImgSizeTypeProps> = (props) => {
         size={size}
         ratio={ratio}
         onSizeUpdate={setComponentSize}
+        {...otherProps}
       >
         <Img key="IMAGE" src={cloudimageUrl} className={clsx(classes?.image)} />
       </Wrapper>

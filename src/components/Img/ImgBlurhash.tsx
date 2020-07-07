@@ -61,6 +61,7 @@ const ImgBlurhash: React.FC<ImgBlurhashProps & ImgSizeTypeProps> = (props) => {
         size={size}
         ratio={ratio}
         onSizeUpdate={setComponentSize}
+        {...otherProps}
       >
         <PlaceholderBlurhash
           key="PLACEHOLDER"
