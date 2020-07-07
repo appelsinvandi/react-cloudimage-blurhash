@@ -53,6 +53,7 @@ const ImgTinyBlur: React.FC<ImgTinyBlurProps & ImgSizeTypeProps> = (props) => {
     )
   } else {
     return (
+      // @ts-ignore
       <Wrapper
         key="WRAPPER"
         className={clsx(className, classes?.wrapper)}
