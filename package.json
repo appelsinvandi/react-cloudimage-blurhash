@@ -39,7 +39,7 @@
     "clsx": "~1.1.0",
     "cxs": "6.2.0",
     "lodash.memoize": "4.1.2",
-    "react-lazyload": "~2.6.5",
+    "react-lazyload": "~3.0.0",
     "react-use": "~15.3.0"
   },
   "peerDependencies": {
