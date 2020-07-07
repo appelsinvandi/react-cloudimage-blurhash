@@ -18,7 +18,7 @@ import { BackgroundImgPlainProps } from './types'
 import { ImgSizeTypeProps } from '../../types/imgComponents'
 
 const BackgroundImgPlain: React.FC<BackgroundImgPlainProps & ImgSizeTypeProps> = (props) => {
-  const { type, size, ratio, lazyLoad, lazyLoadOptions, classes, id, className, children, ...otherProps } = props
+  const { src, type, size, ratio, lazyLoad, lazyLoadOptions, classes, id, className, children, ...otherProps } = props
 
   const reactCloudimageContext = useContext(ReactCloudimageContext)
   const [componentSize, setComponentSize] = useState({ width: 0, height: 0 })
