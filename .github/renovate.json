@@ -1,0 +1,44 @@
+{
+  "timezone": "Europe/Copenhagen",
+  "extends": [
+    ":automergeBranch",
+    ":automergePatch",
+    ":dependencyDashboard",
+    ":disablePeerDependencies",
+    ":disableRateLimiting",
+    ":ignoreModulesAndTests",
+    ":ignoreUnstable",
+    ":pinDevDependencies",
+    ":prImmediately",
+    ":renovatePrefix",
+    ":semanticPrefixFixDepsChoreOthers",
+    ":separateMajorReleases",
+    ":skipStatusChecks",
+    ":updateNotScheduled",
+    "group:monorepos",
+    "group:recommended",
+    "helpers:disableTypesNodeMajor"
+  ],
+  "schedule": ["before 6am on Saturday"],
+  "packageRules": [
+    {
+      "packagePatterns": ["*"],
+      "patch": {
+        "groupName": "Patched dependencies",
+        "groupSlug": "all-patch"
+      }
+    }
+  ],
+  "pin": {
+    "labels": ["dependency", "dependency:pin"]
+  },
+  "patch": {
+    "labels": ["dependency", "dependency:patch"]
+  },
+  "minor": {
+    "labels": ["dependency", "dependency:minor"]
+  },
+  "major": {
+    "labels": ["dependency", "dependency:major"]
+  }
+}
