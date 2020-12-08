@@ -30,13 +30,11 @@ categories:
 exclude-labels:
   - 'skip-changelog'
 version-resolver:
-  # Uncomment when ready for release, and remove 'breaking' from minor
-  # major:
-  #   labels:
-  #     - 'breaking'
-  minor:
+  major:
     labels:
       - 'breaking'
+  minor:
+    labels:
       - 'feature'
       - 'enhancement'
   patch:
