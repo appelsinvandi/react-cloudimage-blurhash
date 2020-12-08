@@ -30,10 +30,10 @@
     }
   ],
   "pin": {
-    "labels": ["dependency", "dependency:pin"]
+    "labels": ["dependency", "dependency:pin", "skip-changelog"]
   },
   "patch": {
-    "labels": ["dependency", "dependency:patch"]
+    "labels": ["dependency", "dependency:patch", "skip-changelog"]
   },
   "minor": {
     "labels": ["dependency", "dependency:minor"]
