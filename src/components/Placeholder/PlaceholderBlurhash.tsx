@@ -45,6 +45,7 @@ const PlaceholderBlurhash: React.FC<PlaceholderBlurhashProps> = (props) => {
       '.is-loaded': {
         opacity: 0,
         transition: 'opacity 0.3s ease-in-out 0s',
+        backgroundColor: 'transparent',
       },
     }),
   }
