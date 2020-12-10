@@ -5,10 +5,20 @@ import cxs from 'cxs'
 import clsx from 'clsx'
 
 // Types
+import { CloudimageFunc } from 'types'
 import { BackgroundImgProps } from './types'
 
 const BackgroundImg: React.FC<BackgroundImgProps> = (props) => {
-  const { src, classes, children, className } = props
+  const { src, classes, children, operations, className } = props
+
+  let backgroundSize: string | undefined
+  if (operations?.func == null || operations?.func === CloudimageFunc.Bound || operations?.func === CloudimageFunc.Cover || operations?.func === CloudimageFunc.Fit) {
+    backgroundSize = 'contain'
+  } else if (operations?.func === CloudimageFunc.Crop || operations?.func === CloudimageFunc.Face) {
+    backgroundSize = 'cover'
+  } else {
+    backgroundSize = 'cover'
+  }
 
   const css = {
     image: cxs({
@@ -21,7 +31,7 @@ const BackgroundImg: React.FC<BackgroundImgProps> = (props) => {
       width: '100%',
       height: '100%',
       backgroundImage: `url("${src}")`,
-      backgroundSize: 'cover',
+      backgroundSize: backgroundSize,
       backgroundPosition: 'center',
       backgroundRepeat: 'none',
     }),
