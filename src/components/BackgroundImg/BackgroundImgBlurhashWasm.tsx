@@ -65,7 +65,7 @@ const BackgroundImgBlurhashWasm: React.FC<BackgroundImgBlurhashProps & ImgSizeTy
             className={clsx(classes?.placeholder)}
           />
           <ImageLoader key="IMAGE_LOADER" src={cloudimageUrl} onImageLoad={handleImageLoad} />
-          <BackgroundImg key="IMAGE" src={cloudimageUrl} className={clsx(classes?.image)} />
+          <BackgroundImg key="IMAGE" src={cloudimageUrl} className={clsx(classes?.image)} operations={otherProps.operations} />
           <BackgroundContent key="CONTENT" className={clsx(classes?.content)}>
             {children}
           </BackgroundContent>
@@ -92,7 +92,7 @@ const BackgroundImgBlurhashWasm: React.FC<BackgroundImgBlurhashProps & ImgSizeTy
           className={clsx(classes?.placeholder)}
         />
         <ImageLoader key="IMAGE_LOADER" src={cloudimageUrl} onImageLoad={handleImageLoad} />
-        <BackgroundImg key="IMAGE" src={cloudimageUrl} className={clsx(classes?.image)} />
+        <BackgroundImg key="IMAGE" src={cloudimageUrl} className={clsx(classes?.image)} operations={otherProps.operations} />
         <BackgroundContent key="CONTENT" className={clsx(classes?.content)}>
           {children}
         </BackgroundContent>
