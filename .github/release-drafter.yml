@@ -3,10 +3,6 @@ tag-template: 'v$RESOLVED_VERSION'
 change-template: '* #$NUMBER $TITLE'
 template: |
   $CHANGES
-
-  ## Contributors
-
-  $CONTRIBUTORS
 categories:
   - title: '💥 Breaking'
     labels:
