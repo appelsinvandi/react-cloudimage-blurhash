@@ -35,6 +35,12 @@ export enum CloudimageFunc {
    */
   Crop = 'crop',
   /**
+   * crops the image automatically keeping the most prominent face.
+   *
+   * Similar to CSS: `background-size: cover;`
+   */
+  Face = 'face',
+  /**
    * Resizes the image keeping proportions adding padding to satisfy the desired dimensions.
    *
    * Similar to CSS: `object-fit: contain;`
