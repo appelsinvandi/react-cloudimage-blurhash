@@ -39,7 +39,7 @@ const BackgroundImgPlain: React.FC<BackgroundImgPlainProps & ImgSizeTypeProps> =
         {...otherProps}
       >
         <LazyLoad once {...generateLazyLoadProps()}>
-          <BackgroundImg key="IMAGE" src={cloudimageUrl} className={clsx(classes?.image)} />
+          <BackgroundImg key="IMAGE" src={cloudimageUrl} className={clsx(classes?.image)} operations={otherProps.operations} />
           <BackgroundContent key="CONTENT" className={clsx(classes?.content)}>
             {children}
           </BackgroundContent>
@@ -59,7 +59,7 @@ const BackgroundImgPlain: React.FC<BackgroundImgPlainProps & ImgSizeTypeProps> =
         onSizeUpdate={setComponentSize}
         {...otherProps}
       >
-        <BackgroundImg key="IMAGE" src={cloudimageUrl} className={clsx(classes?.image)} />
+        <BackgroundImg key="IMAGE" src={cloudimageUrl} className={clsx(classes?.image)} operations={otherProps.operations} />
         <BackgroundContent key="CONTENT" className={clsx(classes?.content)}>
           {children}
         </BackgroundContent>
