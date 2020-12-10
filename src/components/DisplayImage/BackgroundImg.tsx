@@ -33,7 +33,7 @@ const BackgroundImg: React.FC<BackgroundImgProps> = (props) => {
       backgroundImage: `url("${src}")`,
       backgroundSize: backgroundSize,
       backgroundPosition: 'center',
-      backgroundRepeat: 'none',
+      backgroundRepeat: 'no-repeat',
     }),
   }
 
