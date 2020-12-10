@@ -5,7 +5,7 @@ import cxs from 'cxs'
 import clsx from 'clsx'
 
 // Types
-import { CloudimageFunc } from 'types'
+import { CloudimageFunc } from '../../types'
 import { BackgroundImgProps } from './types'
 
 const BackgroundImg: React.FC<BackgroundImgProps> = (props) => {
