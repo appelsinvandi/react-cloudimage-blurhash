@@ -36,7 +36,7 @@
     "build-storybook": "build-storybook"
   },
   "dependencies": {
-    "blurhash": "~1.1.3",
+    "blurhash": "~2.0.0",
     "blurhash-wasm": "~0.2.0",
     "clsx": "~1.1.0",
     "cxs": "6.2.0",
